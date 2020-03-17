@@ -1,47 +1,101 @@
 <?php 
 	
-	include "connect.php";
 
-	echo 'Login<pre>';
-    print_r($_POST);
-    echo '</pre>';
+	function test_input($data) {
+		  $data = trim($data);
+		  $data = stripslashes($data);
+		  $data = htmlspecialchars($data);
+		  return $data;
+		}
 
-
-	$firstname = $lastname = $password_user = $email = $address = "";
- 	$firstNameErr = $lastNameErr = $emailErr = $addressErr = $passwordErr =  "";
- 	$error = "";
-
- 	//functie testare date primite de la form
- 	include "testDate.php";
-
-
- 	setcookie("email",$email,time() + (86400 * 30),'/');
-
-
-    $sql = "SELECT * FROM user WHERE email='$email' AND password ='$password_user';";
-	$result = mysqli_query($conn, $sql);
-	$resultCheck = mysqli_num_rows($result);
-
-
-	if($resultCheck > 0)
+	if(isset($_POST['submit']))
 	{
-		echo "conectat";
+
+		include "connect.php";
+
+		$password_user = $email = "";
+	 	$emailErr = $passwordErr =  "";
+
+
+	 	if(empty($_POST['password']))
+		  {
+		  	$passwordErr = "Password not introduced";
+		  }
+		  else
+		  {
+		  	$password_user = $_POST['password'];
+		  }
+
+		if (empty($_POST["email"])) 
+		  {
+		    $emailErr = "Email is required";
+		  } 
+		  else 
+		  {
+		    $email = test_input($_POST["email"]);
+		    //verifica email
+		    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
+		    {
+		      $emailErr = "Invalid email format";
+		    }
+		  }
+
+
+
+
+	    $sql = "SELECT * FROM user WHERE email=?";
+
+	    $stmt = mysqli_stmt_init($conn);
+	    if(!mysqli_stmt_prepare($stmt,$sql))
+	    {
+
+	    }
+	    else
+	    {
+	    	mysqli_stmt_bind_param($stmt, "s" , $email);
+	    	mysqli_stmt_execute($stmt);
+	    	$results = mysqli_stmt_get_result($stmt);
+	    	if($row = mysqli_fetch_assoc($results))
+	    	{
+
+	    		$passwordCheck = password_verify($password_user, $row['password']);
+
+	    		if($passwordCheck == false)
+	    		{
+	    			echo "Wrong pass";
+	    		}
+	    		else if($passwordCheck == true)
+	    		{
+	    			session_start();
+	    			$_SESSION['email'] = $row['email'];
+	    			$_SESSION['first'] = $row['first_name'];
+	    			$_SESSION['last'] = $row['last_name'];
+	    			$_SESSION['address'] = $row['address'];
+
+	    			header("Location: ../index.php?succes=true");
+
+	    		}
+	    		else
+	    		{
+	    			echo "Eroare";
+	    		}
+	    	}
+	    	else
+	    	{
+	    		echo "No user"; 
+	    	}
+	    }
+
+		$result = mysqli_query($conn, $sql);
+		$resultCheck = mysqli_num_rows($results);
+
 	}
 	else
 	{
-		$sql = "SELECT * FROM user WHERE email='$email'";
-		$result = mysqli_query($conn, $sql);
-		$resultCheck = mysqli_num_rows($result);
-		if($resultCheck > 0)
-		{
-			header("Location: ../auth.php?error=2");
-		}
-		else
-		{
-			header("Location: ../auth.php?error=1");
-		}
-	}
 
+	}
+	
 
 
 ?>
+

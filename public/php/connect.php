@@ -1,15 +1,15 @@
 <?php
 
-	$conn = mysqli_connect('localhost','root','');
+	$servername = "localhost";
+	$dbUsername = "root";
+	$dbPassword = "";
+	$dbName = "fiicode";
+
+	$conn = mysqli_connect($servername,$dbUsername,$dbPassword,$dbName);
 
  	if(!$conn)
 	{
-		echo "Not";
- 	}
-
- 	if(!mysqli_select_db($conn,"fiicode"))
- 	{
- 		echo "database not  selected";
+		die("Connection Failed: ".mysqli_connect_error());
  	}
 	
 ?>

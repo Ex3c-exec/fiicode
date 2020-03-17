@@ -1,19 +1,32 @@
 <?php
 
-	$sql = "SELECT * FROM user WHERE email='$email';";
-	$result = mysqli_query($conn, $sql);
+	$sql = "SELECT * FROM user WHERE email=?;";
+	$stmt = mysqli_stmt_init($conn);
 
-	$resultCheck = mysqli_num_rows($result);
+	//$result = mysqli_query($conn, $sql);
+	//$resultCheck = mysqli_num_rows($result);
 
-	if($resultCheck > 0)
+	if(!mysqli_stmt_prepare($stmt,$sql))
 	{
-		$error = "Already used email";
-		echo "Deja exista email"; 
+		header("Location: ../auth.php?error=sqlError");
 	}
 	else
 	{
-		include "insertData.php";
+		mysqli_stmt_bind_param($stmt, "s" , $email);
+		mysqli_stmt_execute($stmt);
+		mysqli_stmt_store_result($stmt);
+		$resultCheck = mysqli_stmt_num_rows($stmt);
+		if($resultCheck > 0)
+		{
+			header("Location: ../auth.php?error=mailTaken");
+		}
+		else
+		{
+			include "insertData.php";
+		}
 	}
+
+	
 
 
 ?>

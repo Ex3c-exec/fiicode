@@ -65,13 +65,28 @@
 	    $address = test_input($_POST["address"]);
 	  }
 
+
 	  if(empty($_POST['password']))
 	  {
-	  	$paswordErr = "Password not introduced";
+	  	$passwordErr = "Password not introduced";
 	  }
 	  else
 	  {
 	  	$password_user = $_POST['password'];
+	  }
+
+	  if(empty($_POST["password_rpt"]))
+	  {
+	  	$passwordErr_rpt = "Password_rpt not introduced";
+	  }
+	  else
+	  {
+	  	$password_rpt = $_POST['password_rpt'];
+	  	if($password_rpt !== $password_user)
+	  	{
+	  		$passwordErr_rpt = "Passwords don't match";
+	  	}
+
 	  }
   
 

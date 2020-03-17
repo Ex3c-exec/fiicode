@@ -1,26 +1,23 @@
 <?php
 
-	$con = mysqli_connect('localhost','root','');
 
- 	if(!$con)
-	{
-		echo "Not";
- 	}
-
- 	if(!mysqli_select_db($con,"fiicode"))
+ 	$sql = "INSERT INTO user (first_name,last_name,email,address,password) VALUES (?,?,?,?,?)";
+ 	$stmt = mysqli_stmt_init($conn);
+ 	if(!mysqli_stmt_prepare($stmt,$sql))
  	{
- 		echo "database not  selected";
- 	}
-
- 	$sql = "INSERT INTO user (first_name,last_name,email,address,password) VALUES ('$firstname','$lastname','$email','$address','$password_user')";
-
- 	if(!mysqli_query($con,$sql))
- 	{
- 		echo "Not inserted";
+ 		header("Location: ../auth.php?error=sqlError");
  	}
  	else
  	{
- 		echo "Inserted data";
+ 		$passwordHash = password_hash($password_user, PASSWORD_DEFAULT);
+ 		mysqli_stmt_bind_param($stmt, "sssss" , $firstname,$lastname,$email,$address,$passwordHash);
+ 		mysqli_stmt_execute($stmt);
+ 		mysqli_stmt_store_result($stmt);
+ 		
+ 		header("Location: ../auth.php?#login");
+ 		
  	}
+
+ 	
 
 ?>

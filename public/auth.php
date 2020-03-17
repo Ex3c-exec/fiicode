@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    if(isset($_SESSION['email']))
+    {
+        header("Location: index.php?succes=true");    
+    }
+
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +20,12 @@
 
         $errorMail ="";
         $errorPass ="";
-        $email = "";
+
+        $dmail = "";
+        $dfirst ="";
+        $dlast = "";
+        $daddress = "";
+
 
         if(isset($_GET['error']))
         {
@@ -27,12 +41,24 @@
                 $errorPass = "Wrong Password";
             }
         }
-        if(isset($_COOKIE['email']))
+
+        if(isset($_GET['mail']))
         {
-            echo "1";
-            $email = $_COOKIE['email']; 
-            setcookie('email','',time()-1);
+            $dmail = $_GET['mail'];
         }
+        if(isset($_GET['first']))
+        {
+            $dfirst = $_GET['first'];
+        }
+        if(isset($_GET['last']))
+        {
+            $dlast = $_GET['last'];
+        }
+        if(isset($_GET['address']))
+        {
+            $daddress = $_GET['address'];
+        }
+
 
     ?>
 
@@ -44,12 +70,12 @@
         <form method="post" action="php/login.php">
 
             <p>Email</p>
-            <p><?php echo $errorMail?></p>
-            <input type="email" name = "email" value="<?php echo $email ?>" required> 
+            <input type="email" name = "email"  placeholder="E-mail..." required> 
             <p>Password</p>
             <p><?php echo $errorPass?></p>
-            <input type="password" name = "password" required>
+            <input type="password" name = "password" placeholder="Password..." required>
             <button type="submit" name="submit" value="Submit">Log In</button> 
+
             <a href="#register">Don't have an account? Click here!</a>
             
         </form>
@@ -64,18 +90,21 @@
         <form method="POST" action="php/signin.php">
             
             <p>First Name</p>
-            <input type="text" name="first_name" required>
+            <input type="text" name="first_name" placeholder="First Name" value="<?php echo $dfirst ?>" required>
             <p>Last Name</p>
-            <input type="text" name="last_name" required>          
+            <input type="text" name="last_name" placeholder="Last Name" required>          
             <p>Address</p>
-            <input type="text" name="address" required>
+            <input type="text" name="address" placeholder="Address" required>
             <p>Email</p>
-            <input type="email" name="email" required>  
+            <input type="email" name="email" placeholder="Email" required>  
             <p>Password</p>
-            <input type="password" name="password" required>
+            <input type="password" name="password" placeholder="Password" required >
+            <p>Repeat Password</p>
+            <input type="password" name="password_rpt" placeholder="Repeat  Password" >
+
             <button type="submit" name="submit" value="Submit">Register</button>
 
-            
+              
         </form>
     </div>
 
