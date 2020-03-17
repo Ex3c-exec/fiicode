@@ -13,8 +13,8 @@
 <body>
 <nav class="navbar navbar-expand-sm justify-content-end hideOnSmall">
     <ul class="navbar-nav">
-        <li class="nav-item"><a href="" class="nav-link">Books</a></li>
-        <li class="nav-item"><a href="" class="nav-link">Account</a></li>
+        <li class="nav-item"><a href="#multiple-books-component" class="nav-link">Books</a></li>
+        <li class="nav-item"><a href="#account-component" class="nav-link">Account</a></li>
         <li class="nav-item"><a href="" class="nav-link">Logout</a></li>
     </ul>
 </nav>
@@ -45,19 +45,19 @@
 
     <div class="container booksContainer">
             <!-- FIRST BOOK -->
-            <div class="row bookUnselectedContainer">
+            <div id="book1" class="row bookUnselectedContainer">
                 <div class="col-lg-2 col-sm-12 hideOnSmall">
                     <img src="./images/testBOOK.jpg" alt="book" class="img-thumbnail">
                 </div>
                 <div class="col-lg-9 col-sm-9">
-                    <h2>Title: “Pagini alese” </h2>
+                    <h2>Title: “Pagini alese”</h2>
                     <h4>Author: George Cosbuc</h4>
                     <h4>Description:</h4>
                     <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                         Ipsum has been the industry's standard dummy text ever since , when  an
                         unknown printer took a galley of type and scrambled it the printing and ....
                     </h4>
-                    <button class="moreBtn" id="single-book-btn" onclick="componentSelector(this.id)">More</button>
+                    <button class="btn-style" id="single-book-btn" onclick="changeHref(this.id)">More</button>
                 </div>
                 <div class="col-lg-1 col-sm-3">
                     <h2 class="hideOnSmall">1.</h2>
@@ -66,19 +66,19 @@
             </div>
 
             <!-- SECOND BOOK -->
-            <div class="row bookUnselectedContainer">
+            <div id="book2" class="row bookUnselectedContainer">
                 <div class="col-lg-2 col-sm-12 hideOnSmall">
                     <img src="./images/testBOOK.jpg" alt="book" class="img-thumbnail">
                 </div>
                 <div class="col-lg-9 col-sm-9">
-                    <h2>Title: “Pagini alese” </h2>
+                    <h2>Title: “Pagini alese”</h2>
                     <h4>Author: George Cosbuc</h4>
                     <h4>Description:</h4>
                     <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                         Ipsum has been the industry's standard dummy text ever since , when  an
                         unknown printer took a galley of type and scrambled it the printing and ....
                     </h4>
-                    <button class="moreBtn">More</button>
+                    <button class="btn-style" id="single-book-btn" onclick="changeHref(this.id)">More</button>
                 </div>
                 <div class="col-lg-1 col-sm-3">
                     <h2 class="hideOnSmall">1.</h2>
@@ -94,18 +94,19 @@
     <article id="single-book-component" class="container booksContainer">
 
         <div class="row bookUnselectedContainer">
-            <div class="col-lg-2 col-sm-12 hideOnSmall">
-                <img src="./images/testBOOK.jpg" alt="book" class="img-thumbnail">
+            <div class="col-lg-2 col-sm-12">
+                <img src="./images/testBOOK.jpg" alt="book" class="img-thumbnail-unic">
             </div>
             <div class="col-lg-9 col-sm-9">
-                <h2>Title: “Pagini alese” </h2>
+                <h2>Title: “Pagini alese”</h2>
                 <h4>Author: George Cosbuc</h4>
                 <h4>Description:</h4>
                 <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                     Ipsum has been the industry's standard dummy text ever since , when  an
                     unknown printer took a galley of type and scrambled it the printing and ....
                 </h4>
-                <button class="moreBtn">More</button>
+                <button class="btn-style" id="multiple-books-btn" onclick="changeHref(this.id)">Back</button>
+                <button class="btn-style" id="request-btn" onclick="changeHref(this.id)"> Request / Not available now</button>
             </div>
             <div class="col-lg-1 col-sm-3">
                 <h2 class="hideOnSmall">1.</h2>
@@ -113,6 +114,37 @@
             </div>
         </div>
     </article>
+
+<!-- REQUEST COMPONENT -->
+<section id="request-component" class="container templateContainer">
+
+    <div class="templateMiniContainer">
+        <h1>Request form</h1>
+        <form>
+            <h4>When could you give it back?</h4>
+            <select id="###///" required>
+                <option value="0w">Less than a week</option>
+                <option value="1w">1 week</option>
+                <option value="2w">2 weeks</option>
+                <option value="3w">3 weeks</option>
+                <option value="4w">4 weeks</option>
+              </select>
+            <h4>Your phone number</h4>
+            <input type="number" required size="10"><br />
+            <button class="btn-style">Request book</button>
+        </form>
+    </div>
+
+</section>
+
+<!-- ACCOUNT COMPONENT -->
+<section id="account-component" class="container templateContainer">
+
+    <div class="templateMiniContainer">
+        <h2>ACCOUNT</h2>
+    </div>
+
+</section>
 
 <footer>
     © Copyright 2020. All the rights reserved.
