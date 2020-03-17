@@ -1,0 +1,123 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/dashboard.css"/>
+    <title>Dashboard</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm justify-content-end hideOnSmall">
+    <ul class="navbar-nav">
+        <li class="nav-item"><a href="" class="nav-link">Books</a></li>
+        <li class="nav-item"><a href="" class="nav-link">Account</a></li>
+        <li class="nav-item"><a href="" class="nav-link">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="pos-f-t hideOnBig">
+    <div class="collapse" id="navbarToggleExternalContent">
+      <div style="background-color: #D6F1C1;">
+        <a class="mobileNavLinks" href="">Books</a>
+        <a class="mobileNavLinks" style="margin:2px 0" href="">Account</a>
+        <a class="mobileNavLinks" href="">Logout</a>
+    </ul>
+      </div>
+    </div>
+    <nav class="navbar navbar-light" style="background-color: #D6F1C1;">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+  </div>
+
+<!-- MULTIPLE BOOKS COMPONENT -->
+<main id="multiple-books-component">
+
+    <div class="container searchContainer text-center">
+        <h1>Welcome user!</h1>
+        <input class="searchInput" placeholder="Type here a book name..." type="text">
+    </div>
+
+    <div class="container booksContainer">
+            <!-- FIRST BOOK -->
+            <div class="row bookUnselectedContainer">
+                <div class="col-lg-2 col-sm-12 hideOnSmall">
+                    <img src="./images/testBOOK.jpg" alt="book" class="img-thumbnail">
+                </div>
+                <div class="col-lg-9 col-sm-9">
+                    <h2>Title: “Pagini alese” </h2>
+                    <h4>Author: George Cosbuc</h4>
+                    <h4>Description:</h4>
+                    <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                        Ipsum has been the industry's standard dummy text ever since , when  an
+                        unknown printer took a galley of type and scrambled it the printing and ....
+                    </h4>
+                    <button class="moreBtn" id="single-book-btn" onclick="componentSelector(this.id)">More</button>
+                </div>
+                <div class="col-lg-1 col-sm-3">
+                    <h2 class="hideOnSmall">1.</h2>
+                    <button class="btn-like hideOnSmall"><img src="./images/heart.png" alt="heart"><p>1233</p></button>
+                </div>
+            </div>
+
+            <!-- SECOND BOOK -->
+            <div class="row bookUnselectedContainer">
+                <div class="col-lg-2 col-sm-12 hideOnSmall">
+                    <img src="./images/testBOOK.jpg" alt="book" class="img-thumbnail">
+                </div>
+                <div class="col-lg-9 col-sm-9">
+                    <h2>Title: “Pagini alese” </h2>
+                    <h4>Author: George Cosbuc</h4>
+                    <h4>Description:</h4>
+                    <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                        Ipsum has been the industry's standard dummy text ever since , when  an
+                        unknown printer took a galley of type and scrambled it the printing and ....
+                    </h4>
+                    <button class="moreBtn">More</button>
+                </div>
+                <div class="col-lg-1 col-sm-3">
+                    <h2 class="hideOnSmall">1.</h2>
+                    <button class="btn-like hideOnSmall"><img src="./images/heart.png" alt="heart"><p>1233</p></button>
+                </div>
+            </div>
+
+    </div>
+
+</main>
+
+<!-- SINGLE BOOK COMPONENT -->
+    <article id="single-book-component" class="container booksContainer">
+
+        <div class="row bookUnselectedContainer">
+            <div class="col-lg-2 col-sm-12 hideOnSmall">
+                <img src="./images/testBOOK.jpg" alt="book" class="img-thumbnail">
+            </div>
+            <div class="col-lg-9 col-sm-9">
+                <h2>Title: “Pagini alese” </h2>
+                <h4>Author: George Cosbuc</h4>
+                <h4>Description:</h4>
+                <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                    Ipsum has been the industry's standard dummy text ever since , when  an
+                    unknown printer took a galley of type and scrambled it the printing and ....
+                </h4>
+                <button class="moreBtn">More</button>
+            </div>
+            <div class="col-lg-1 col-sm-3">
+                <h2 class="hideOnSmall">1.</h2>
+                <button class="btn-like hideOnSmall"><img src="./images/heart.png" alt="heart"><p>1233</p></button>
+            </div>
+        </div>
+    </article>
+
+<footer>
+    © Copyright 2020. All the rights reserved.
+</footer>
+
+<script src="./js/dashboard.js"></script>
+</body>
+</html>
