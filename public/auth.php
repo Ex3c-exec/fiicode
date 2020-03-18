@@ -2,7 +2,7 @@
     session_start();
     if(isset($_SESSION['email']))
     {
-        header("Location: index.php?succes=true");    
+        header("Location: dashboard.php");    
     }
 
 ?>
@@ -55,23 +55,15 @@
         <h1>Login</h1>
 
         <form method="post" action="php/login.php">
-
             <p>Email</p>
-            <span> <?php if(isset($error) && $error === "lnoUser") echo "<p style='color:red'>Your account doesn't exist </p> "?> </span>
             <input type="email" name = "email"   value="<?php echo $lemail?>" required> 
-
-
             <p>Password</p>
-            <span> <?php if(isset($error) && $error === "lwrongPass") echo "<p style='color:red'>Wrong Password</p> "?> </span>
             <input type="password" name = "password"  required>
             <button type="submit" name="submit" value="Submit">Login</button> 
-
+            <span> <?php if(isset($error) && $error === "lnoUser") echo "<p style='color:red'>Your account doesn't exist </p> "?> </span>
+            <span> <?php if(isset($error) && $error === "lwrongPass") echo "<p style='color:red'>Wrong Password</p> "?> </span>
             <a href="#register">Don't have an account? Click here!</a>
-            
         </form>
-
-        
-
 
     </div>
 

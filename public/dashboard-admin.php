@@ -1,3 +1,12 @@
+<?php
+    // DACA NU ESTE SETATA SESIUNEA TE SCOATE AFARA 
+    session_start();
+    if(!isset($_SESSION['email']))
+    {
+        header("Location: auth.php");    
+    }
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,22 +25,18 @@
 
     <nav class="navbar navbar-expand-sm justify-content-end hideOnSmall">
         <ul class="navbar-nav">
-            <li class="nav-item"><a href="#multiple-books-component" class="nav-link">Requests</a></li>
-            <li class="nav-item"><a href="#multiple-books-component" class="nav-link">New book</a></li>
             <li class="nav-item"><a href="#multiple-books-component" class="nav-link">Books</a></li>
             <li class="nav-item"><a href="#account-component" class="nav-link">Account</a></li>
-            <li class="nav-item"><a href="" class="nav-link">Logout</a></li>
+            <li class="nav-item"><a href="./php/logout.php" class="nav-link">Logout</a></li>
         </ul>
     </nav>
 
     <div class="pos-f-t hideOnBig">
         <div class="collapse" id="navbarToggleExternalContent">
         <div style="background-color: #D6F1C1;">
-            <a class="mobileNavLinks" href="#multiple-books-component">Requests</a>
-            <a class="mobileNavLinks" style="margin:2px 0" href="#account-component">New book</a>
             <a class="mobileNavLinks" href="#multiple-books-component">Books</a>
             <a class="mobileNavLinks" style="margin:2px 0" href="#account-component">Account</a>
-            <a class="mobileNavLinks" href="">Logout</a>
+            <a class="mobileNavLinks" href="./php/logout.php">Logout</a>
         </ul>
         </div>
         </div>
@@ -94,6 +99,6 @@
     © Copyright 2020. All the rights reserved.
 </footer>
 
-<script src="./js/dashboard-admin.js"></script>
+<script src="./js/dashboard.js"></script>
 </body>
 </html>

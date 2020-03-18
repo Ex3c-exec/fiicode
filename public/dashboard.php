@@ -1,3 +1,12 @@
+<?php
+    // DACA NU ESTE SETATA SESIUNEA TE SCOATE AFARA 
+    session_start();
+    if(!isset($_SESSION['email']))
+    {
+        header("Location: auth.php");    
+    }
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,7 +27,7 @@
         <ul class="navbar-nav">
             <li class="nav-item"><a href="#multiple-books-component" class="nav-link">Books</a></li>
             <li class="nav-item"><a href="#account-component" class="nav-link">Account</a></li>
-            <li class="nav-item"><a href="" class="nav-link">Logout</a></li>
+            <li class="nav-item"><a href="./php/logout.php" class="nav-link">Logout</a></li>
         </ul>
     </nav>
 
@@ -27,7 +36,7 @@
         <div style="background-color: #D6F1C1;">
             <a class="mobileNavLinks" href="#multiple-books-component">Books</a>
             <a class="mobileNavLinks" style="margin:2px 0" href="#account-component">Account</a>
-            <a class="mobileNavLinks" href="">Logout</a>
+            <a class="mobileNavLinks" href="./php/logout.php">Logout</a>
         </ul>
         </div>
         </div>
