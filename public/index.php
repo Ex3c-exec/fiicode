@@ -37,6 +37,8 @@ if(isset($_SESSION['email']))
         <h1>Bookstore</h1>
     </div>
 
+    <p><a href="php/logout.php">Log Out</a></p>
+
     <div class="welcomeContainer">
         <img src="./images/closedbook.png" alt="book">
         <div>

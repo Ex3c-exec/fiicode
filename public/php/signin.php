@@ -12,7 +12,8 @@
 
 		$firstname = $lastname = $password_user = $email = $address = $password_user_rpt =  "";
 	 	$firstNameErr = $lastNameErr = $emailErr = $addressErr = $passwordErr =  $passwordErr_rpt = "";
-	 	$error = "";
+	 	
+
 
 
 	 	//functie testare date primite de la form
@@ -42,13 +43,13 @@
 
 	 		if($passwordErr_rpt === "Passwords don't match")
 	 		{
-	 			echo $passwordErr_rpt;
-				//header("Location: ../auth.php?error=passwordMatch&first=".$firstname."&last=".$lastname."&mail=".$email."&address=".$address."#register");	 	
+	 			
+				header("Location: ../auth.php?error=passwordMatch&first=".$firstname."&last=".$lastname."&mail=".$email."&address=".$address."#register");	 	
 			}
 	 		
 	 		if($emailErr == "Invalid email format")
 	 		{
-	 			header("Location: ../auth.php?error=emailFormat&first=".$firstname."&last=".$lastname."&mail=".$email."&address=".$address."#register");
+	 			header("Location: ../auth.php?error=emailFormat&first=".$firstname."&last=".$lastname."&address=".$address."#register");
 	 		}
 	 		
 	 		if($lastNameErr == "Only letters and white space allowed" || $firstNameErr == "Only letters and white space allowed")
@@ -59,7 +60,7 @@
 
 	 	}
 
-	 	mysqli_stmt_close($stmt);
+	 	
 		mysqli_close($conn);
 	 	
 

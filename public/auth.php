@@ -18,29 +18,11 @@
 
     <?php
 
-        $errorMail ="";
-        $errorPass ="";
-
         $dmail = "";
         $dfirst ="";
         $dlast = "";
         $daddress = "";
-
-
-        if(isset($_GET['error']))
-        {
-            
-            $val = $_GET['error'];
-            
-            if($val === '1')
-            {
-                $errorMail = "Email doesn't exist";
-            }
-            else if($val === '2' )
-            {
-                $errorPass = "Wrong Password";
-            }
-        }
+        $lemail = "";
 
         if(isset($_GET['mail']))
         {
@@ -58,22 +40,30 @@
         {
             $daddress = $_GET['address'];
         }
-
+        if(isset($_GET['error']))
+        {
+            $error = $_GET['error'];
+        }
+        if(isset($_GET['lemail']))
+        {
+            $lemail = $_GET['lemail'];
+        }
 
     ?>
 
     <div id="login">
         <h1>Login</h1>
 
-
-
         <form method="post" action="php/login.php">
 
             <p>Email</p>
-            <input type="email" name = "email"  placeholder="E-mail..." required> 
+            <span> <?php if(isset($error) && $error === "lnoUser") echo "<p style='color:red'>Your account doesn't exist </p> "?> </span>
+            <input type="email" name = "email"  placeholder="E-mail..." value="<?php echo $lemail?>" required> 
+
+
             <p>Password</p>
-            <p><?php echo $errorPass?></p>
-            <input type="password" name = "password" placeholder="Password..." required>
+            <span> <?php if(isset($error) && $error === "lwrongPass") echo "<p style='color:red'>Wrong Password</p> "?> </span>
+            <input type="password" name = "password" placeholder="Password..."  required>
             <button type="submit" name="submit" value="Submit">Log In</button> 
 
             <a href="#register">Don't have an account? Click here!</a>
@@ -91,16 +81,29 @@
             
             <p>First Name</p>
             <input type="text" name="first_name" placeholder="First Name" value="<?php echo $dfirst ?>" required>
+
+
             <p>Last Name</p>
-            <input type="text" name="last_name" placeholder="Last Name" required>          
+            <input type="text" name="last_name" placeholder="Last Name" value="<?php echo $dlast ?>"  required>          
+
+
             <p>Address</p>
-            <input type="text" name="address" placeholder="Address" required>
+            <input type="text" name="address" placeholder="Address" value="<?php echo $daddress ?>" required>
+
+
             <p>Email</p>
-            <input type="email" name="email" placeholder="Email" required>  
+            <span> <?php if(isset($error) && $error === "emailTaken") echo "<p style='color:red'>Email already exists</p> "?> </span>
+            <input type="email" name="email" placeholder="Email" value="<?php echo $dmail ?>" required>  
+
+
             <p>Password</p>
-            <input type="password" name="password" placeholder="Password" required >
+            <span> <?php if(isset($error) && $error === "passwordMatch") echo "<p style='color:red'>Passwords Don\t Match</p> "?> </span>
+            <input type="password" name="password" placeholder="Password"  required >
+            
+
             <p>Repeat Password</p>
-            <input type="password" name="password_rpt" placeholder="Repeat  Password" >
+            <input type="password" name="password_rpt" placeholder="Repeat  Password"  required>
+
 
             <button type="submit" name="submit" value="Submit">Register</button>
 

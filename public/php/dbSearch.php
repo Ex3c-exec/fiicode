@@ -18,11 +18,13 @@
 		$resultCheck = mysqli_stmt_num_rows($stmt);
 		if($resultCheck > 0)
 		{
-			header("Location: ../auth.php?error=mailTaken");
+			header("Location: ../auth.php?error=emailTaken&first=".$firstname."&last=".$lastname."&address=".$address."#register");
+
 		}
 		else
 		{
 			include "insertData.php";
+			mysqli_stmt_close($stmt);
 		}
 	}
 

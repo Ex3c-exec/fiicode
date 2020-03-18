@@ -17,18 +17,10 @@
 	 	$emailErr = $passwordErr =  "";
 
 
-	 	if(empty($_POST['password']))
-		  {
-		  	$passwordErr = "Password not introduced";
-		  }
-		  else
-		  {
-		  	$password_user = $_POST['password'];
-		  }
-
-		if (empty($_POST["email"])) 
+	 	if (empty($_POST["email"])) 
 		  {
 		    $emailErr = "Email is required";
+		    header("Location: ../auth.php?error=lemailReq");
 		  } 
 		  else 
 		  {
@@ -37,7 +29,18 @@
 		    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
 		    {
 		      $emailErr = "Invalid email format";
+		      header("Location: ../auth.php?error=lemailFormat");
 		    }
+		  }
+
+	 	if(empty($_POST['password']))
+		  {
+		  	$passwordErr = "Password not introduced";
+		  	header("Location: ../auth.php?error=lnoPass&lemail=".$email."#login");
+		  }
+		  else
+		  {
+		  	$password_user = $_POST['password'];
 		  }
 
 
@@ -62,7 +65,7 @@
 
 	    		if($passwordCheck == false)
 	    		{
-	    			echo "Wrong pass";
+	    			header("Location: ../auth.php?error=lwrongPass&lemail=".$email."#login");
 	    		}
 	    		else if($passwordCheck == true)
 	    		{
@@ -77,12 +80,13 @@
 	    		}
 	    		else
 	    		{
-	    			echo "Eroare";
+	    			header("Location: ../index.php?");
 	    		}
 	    	}
 	    	else
 	    	{
-	    		echo "No user"; 
+	    		header("Location: ../auth.php?error=lnoUser");
+
 	    	}
 	    }
 
