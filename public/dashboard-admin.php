@@ -6,6 +6,7 @@
         header("Location: auth.php");    
     }
 ?>
+?>
 
 <html lang="en">
 <head>

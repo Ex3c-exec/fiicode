@@ -1,3 +1,12 @@
+<?php
+    // DACA NU ESTE SETATA SESIUNEA TE SCOATE AFARA 
+    session_start();
+     if(isset($_SESSION['email']))
+    {
+        header("Location: dashboard.php");    
+    }
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
