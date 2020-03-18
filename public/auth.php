@@ -58,12 +58,12 @@
 
             <p>Email</p>
             <span> <?php if(isset($error) && $error === "lnoUser") echo "<p style='color:red'>Your account doesn't exist </p> "?> </span>
-            <input type="email" name = "email"  placeholder="E-mail..." value="<?php echo $lemail?>" required> 
+            <input type="email" name = "email"   value="<?php echo $lemail?>" required> 
 
 
             <p>Password</p>
             <span> <?php if(isset($error) && $error === "lwrongPass") echo "<p style='color:red'>Wrong Password</p> "?> </span>
-            <input type="password" name = "password" placeholder="Password..."  required>
+            <input type="password" name = "password"  required>
             <button type="submit" name="submit" value="Submit">Login</button> 
 
             <a href="#register">Don't have an account? Click here!</a>
@@ -80,29 +80,29 @@
         <form method="POST" action="php/signin.php">
             
             <p>First Name</p>
-            <input type="text" name="first_name" placeholder="First Name" value="<?php echo $dfirst ?>" required>
+            <input type="text" name="first_name"  value="<?php echo $dfirst ?>" required>
 
 
             <p>Last Name</p>
-            <input type="text" name="last_name" placeholder="Last Name" value="<?php echo $dlast ?>"  required>          
+            <input type="text" name="last_name"  value="<?php echo $dlast ?>"  required>          
 
 
             <p>Address</p>
-            <input type="text" name="address" placeholder="Address" value="<?php echo $daddress ?>" required>
+            <input type="text" name="address"  value="<?php echo $daddress ?>" required>
 
 
             <p>Email</p>
             <span> <?php if(isset($error) && $error === "emailTaken") echo "<p style='color:red'>Email already exists</p> "?> </span>
-            <input type="email" name="email" placeholder="Email" value="<?php echo $dmail ?>" required>  
+            <input type="email" name="email"  value="<?php echo $dmail ?>" required>  
 
 
             <p>Password</p>
             <span> <?php if(isset($error) && $error === "passwordMatch") echo "<p style='color:red'>Passwords Don\t Match</p> "?> </span>
-            <input type="password" name="password" placeholder="Password"  required >
+            <input type="password" name="password"   required >
             
 
             <p>Repeat password</p>
-            <input type="password" name="password_rpt" placeholder="Repeat  password"  required>
+            <input type="password" name="password_rpt"  required>
 
 
             <button type="submit" name="submit" value="Submit">Register</button>
