@@ -1,27 +1,28 @@
-
 <?php
-session_start();
-if(isset($_SESSION['email']))
-{
-}
+    // DACA NU ESTE SETATA SESIUNEA TE SCOATE AFARA 
+    session_start();
+     if(isset($_SESSION['email']))
+    {
+        header("Location: dashboard.php");    
+    }
 ?>
-
 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/home.css" />
     <title>Welcome</title>
 </head>
 <body>
 
 <main id="main">
-    <div class="phoneNav" id="hideOnBig">
-      <!--  -->
-    </div>
-    <nav>
-        <ul id="interactMenuPhone">
+    <nav id="hideOnSmall">
+        <ul>
             <div class="left">
                 <img src="./images/fiicode.png" alt="fiicode">
                 <li><a href="#">FiiCode project</a></li>
@@ -33,11 +34,25 @@ if(isset($_SESSION['email']))
         </ul>
     </nav>
 
+    <div id="hideOnBig" class="pos-f-t">
+        <div class="collapse" id="navbarToggleExternalContent">
+          <div style="background-color: #D6F1C1;">
+            <a class="mobileNavLinks" href="./auth.php#login">Login</a>
+            <a class="mobileNavLinks" style="margin-top:2px" href="./auth.php#register">Register</a>
+            <a class="mobileNavLinks" style="margin-top:2px" href="#contactUs">Contact</a>
+        </ul>
+          </div>
+        </div>
+        <nav class="navbar navbar-light" style="background-color: #D6F1C1;">
+          <button style="box-shadow: 0 0; margin: 0; padding: 0;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </nav>
+      </div>
+
     <div class="title">
         <h1>Bookstore</h1>
     </div>
-
-    <p><a href="php/logout.php">Log Out</a></p>
 
     <div class="welcomeContainer">
         <img src="./images/closedbook.png" alt="book">

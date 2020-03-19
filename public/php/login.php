@@ -75,7 +75,7 @@
 	    			$_SESSION['last'] = $row['last_name'];
 	    			$_SESSION['address'] = $row['address'];
 
-	    			header("Location: ../index.php?succes=true");
+	    			header("Location: ../dashboard.php");
 
 	    		}
 	    		else

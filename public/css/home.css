@@ -29,7 +29,7 @@ nav {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-ul {
+nav ul {
     list-style-type: none;
     display: flex;
 }
@@ -77,6 +77,13 @@ a {
     font-family: Milestone;
     color: #643754;
     font-size: 2.5rem;
+    transition: color 0.5s, text-shadow 0.5s;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #904e79;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);    
 }
 
 .welcomeContainer {
@@ -310,28 +317,15 @@ input:focus::placeholder {
     .left, img, section, #hideOnSmall {
         display: none;
     }
-    ul {
-        height: 100vh;
-        width: 50%;
-        display: none;
-        position: absolute;
-        background-color: #D6F1C1;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    }
-    .right {
-        display: flex;
-        flex-direction: column;
-    }
-    li {
-        margin: 1rem;
-    }
-
-    /* INTERACTIVE CLASS FOR SIDE MENU (ON PHONE) */
-    .hide {
-        display: none;
-    }
-    .display {
+    .mobileNavLinks {
         display: block;
+        padding: 2px;
+        font-size: 1.5rem;
+        color: #D6F1C1;
+        text-align: center;
+        box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+        background: #643754;
+        text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.10);
     }
 
     h1 {
