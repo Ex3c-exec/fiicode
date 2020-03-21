@@ -11,7 +11,6 @@
     }
 
 ?>
-?>
 
 <html lang="en">
 <head>
