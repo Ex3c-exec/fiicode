@@ -1,3 +1,16 @@
+<?php
+    // DACA NU ESTE SETATA SESIUNEA TE SCOATE AFARA 
+    session_start();
+     if(isset($_SESSION['email']))
+    {
+        header("Location: dashboard.php");    
+    }
+
+    
+    include 'phpmailer/contact.php'
+
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -81,10 +94,11 @@
     <a href="#main" class="goBackUpButton" style="background-color: #D6F1C1;"><div class="arrow">s</div></a>
     <div class="title">
         <h1>Contact us</h1>
-        <form id="contactForm">
-            <input placeholder="Email" type="email" required>
-            <input placeholder="Message" type="text" required>
-            <button>Submit</button>
+        <form id="contactForm" method = "POST" action="">
+            <input placeholder="Name..." type="text" name="name" required>
+            <input placeholder="Email..." type="email" name="email" required>
+            <input placeholder="Message..." type="text" name="message" required>
+            <button type="submit" name="submit" value="submit">Submit</button>
         </form>
     </div>
 

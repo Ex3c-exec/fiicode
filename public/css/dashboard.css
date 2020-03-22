@@ -7,6 +7,7 @@ body {
     font-family: Panettone;
     background-color: #643754;
     position: relative;
+    min-height: 100vh;
 }
 
 html {
@@ -158,6 +159,13 @@ footer {
     width: 100%;
 }
 
+.descriptionLimited {
+    max-height: 10em;
+    overflow-y: hidden;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+}
+
 .templateMiniContainer {
     text-align: center;
 }
@@ -165,7 +173,7 @@ footer {
     color: #D6F1C1;
 }
 
-.templateMiniContainer input, select {
+.templateMiniContainer input, select  {
     background-color:#D6F1C1; 
     margin: 0 auto 1rem auto;
     width: 50%;
@@ -176,16 +184,59 @@ footer {
     padding: 0;
     box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
 }
+textarea {
+    text-align: left;
+    background-color:#D6F1C1; 
+    margin: 0 auto 1rem auto;
+    width: 50%;
+    border: 0;
+    color: #643754;
+    font-size: 1.5rem;
+    padding: 2px;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+}
 
 .templateMiniContainer input:focus {
     outline: none;
     background-color: rgb(228, 230, 227);
 }
 
+.panelHideShow {
+    background-color: red;
+}
+
 .user-photo {
     border-radius: 50%;
     width: 200px;
     height: 200px;
+}
+
+.requestsList-item {
+    background-color: #D6F1C1;
+    padding: 2px 0;
+    color: #643754;
+    display: flex;
+    text-align: center;
+    margin: 3px 0;
+    cursor: pointer;
+}
+.requestsList-item div {
+    padding: 5px;
+    font-size: 1.3rem;
+    flex: 1;
+}
+
+.requestsList-item p {
+    margin: 0;
+}
+
+.requestsList-item button {
+    margin: 10px 0;
+    border: 0;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+    width: 35%;
+    color: #D6F1C1;
+    background-color: #643754;
 }
 
 /* BIG CONDITIONS */
@@ -247,10 +298,20 @@ footer {
     font-size: 1.2rem;
     }
 
-    .templateMiniContainer input, select {
+    .templateMiniContainer input, select, textarea {
         width: 70%;
     }
     .btn-style-width {
+        width: 90%;
+    }
+    h2 {
+        font-size: 2rem;
+    }
+    h4 {
+        font-size: 1.2rem;
+    }
+    #single-book-component button {
+        font-size: 1rem;
         width: 90%;
     }
 }

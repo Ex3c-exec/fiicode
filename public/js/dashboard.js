@@ -138,7 +138,7 @@ document.getElementById('search-val').addEventListener('input', ()=>{
     if(search == '')
         booksCpy = null;
     else
-        booksCpy = books.filter(book=> book.title.startsWith(search))
+        booksCpy = books.filter(book=> book.title.toLowerCase().startsWith(search.toLowerCase()))
 
     multipleBooksComponentDOM(booksCpy)
 })

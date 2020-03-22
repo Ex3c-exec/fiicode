@@ -74,8 +74,16 @@
 	    			$_SESSION['first'] = $row['first_name'];
 	    			$_SESSION['last'] = $row['last_name'];
 	    			$_SESSION['address'] = $row['address'];
+	    			$_SESSION['admin'] = $row['admin'];
 
-	    			header("Location: ../dashboard.php");
+	    			if($_SESSION['admin'] == 1)
+	    			{
+	    				header("Location: ../dashboard-admin.php");
+	    			}
+	    			else
+	    			{
+	    				header("Location: ../dashboard.php");
+	    			}
 
 	    		}
 	    		else
