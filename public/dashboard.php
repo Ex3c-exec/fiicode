@@ -5,6 +5,10 @@
     {
         header("Location: auth.php");    
     }
+    if($_SESSION['admin'] == 1)
+    {
+        header("Location: dashboard-admin.php");
+    }
 ?>
 
 <html lang="en">
