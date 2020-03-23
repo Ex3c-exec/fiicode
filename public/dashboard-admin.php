@@ -11,7 +11,7 @@
     }
 
 ?>
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -42,12 +42,11 @@
     <div class="pos-f-t hideOnBig">
         <div class="collapse" id="navbarToggleExternalContent">
         <div style="background-color: #D6F1C1;">
-            <a class="mobileNavLinks" href="#requests-books-component">Requests</a>
+            <a class="mobileNavLinks" href="#requests-component">Requests</a>
             <a class="mobileNavLinks" style="margin:2px 0" href="#newbook-component">New book</a>
             <a class="mobileNavLinks" style="margin:2px 0" href="#multiple-books-component">Books</a>
             <a class="mobileNavLinks" style="margin:2px 0" href="#account-component">Account</a>
             <a class="mobileNavLinks" href="./php/logout.php">Logout</a>
-        </ul>
         </div>
         </div>
         <nav class="navbar navbar-light" style="background-color: #D6F1C1;">
@@ -61,7 +60,7 @@
     <main id="multiple-books-component">
 
         <div class="container searchContainer text-center">
-            <h1>Welcome user!</h1>
+            <h1>Welcome!</h1>
             <input id="search-val" class="searchInput" placeholder="Type here a book name..." type="text">
         </div>
 

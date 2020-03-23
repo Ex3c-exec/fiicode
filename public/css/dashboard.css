@@ -78,7 +78,8 @@ h1 {
 }
 
 h2, h4 {
-    text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25)
+    text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
+    word-wrap: break-word;
 }
 
 .btn-style {
@@ -313,5 +314,24 @@ textarea {
     #single-book-component button {
         font-size: 1rem;
         width: 90%;
+    }
+
+    .requestsList-item div {
+        padding: 5px;
+        font-size: 0.8rem;
+    }
+    
+    .requestsList-item p {
+        margin: 0;
+    }
+    
+    .requestsList-item button {
+        margin: 5px 0;
+        border: 0;
+        box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+        width: 100%;
+        color: #D6F1C1;
+        background-color: #643754;
+        cursor: pointer;
     }
 }

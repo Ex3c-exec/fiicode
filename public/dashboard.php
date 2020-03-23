@@ -21,7 +21,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/dashboard.css"/>
-    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <title>Dashboard Admin</title>
 </head>
 <body>
 
@@ -38,7 +39,7 @@
     <div class="pos-f-t hideOnBig">
         <div class="collapse" id="navbarToggleExternalContent">
         <div style="background-color: #D6F1C1;">
-            <a class="mobileNavLinks" href="#multiple-books-component">Books</a>
+            <a class="mobileNavLinks" style="margin:2px 0" href="#multiple-books-component">Books</a>
             <a class="mobileNavLinks" style="margin:2px 0" href="#account-component">Account</a>
             <a class="mobileNavLinks" href="./php/logout.php">Logout</a>
         </ul>
@@ -55,7 +56,7 @@
     <main id="multiple-books-component">
 
         <div class="container searchContainer text-center">
-            <h1>Welcome user!</h1>
+            <h1>Welcome!</h1>
             <input id="search-val" class="searchInput" placeholder="Type here a book name..." type="text">
         </div>
 
@@ -103,6 +104,6 @@
     © Copyright 2020. All the rights reserved.
 </footer>
 
-<script src="./js/dashboard.js"></script>
+<script  src="./js/dashboard.js"></script>
 </body>
 </html>

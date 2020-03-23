@@ -3,13 +3,32 @@ let books = []
 let requests = [
     {id:1, book:"Povestile lui Ilie", date:'12-03-2020', status:'pending', name:"Anfimov Vladimir", email:'vladimir@yahoo.com',address:'Dimitrie Dan 67c', phone:'073039302', term:'2 weeks'},
     {id:2, book:"Calea de aur", date:'11-11-2020', status:'declined', name:"Tania Miri", email:'Tania@yahoo.com',address:'Magrule 32c', phone:'072033443', term:'1 weeks'},
-    {id:3, book:"La vanitr de mure", date:'11-11-2023', status:'pending', name:"Sarmua Lara", email:'Gigelia@yahoo.com',address:'Tiganai 23b', phone:'082222222', term:'1 weeks'}
+    {id:3, book:"La vanitr de mure", date:'11-11-2024', status:'pending', name:"Sarmua Lara", email:'Gigelia@yahoo.com',address:'Tiganai 23b', phone:'082222222', term:'1 weeks'}
 ]
+let account = {
+    name:"Anfimov Vladimir",
+    email:"vladymir100@gmail.com",
+    address: 'Dimitire Dan 67C'
+}
 
 // REQUESTS CLASS FOR GLOBAL DATA
 class AjaxRequest {
     constructor(){
-        this.url_books = 'http://localhost/FIICODE/public/php/books/';
+        this.url_books = './php/books/';
+    }
+
+    checkPass(){
+        return 'parola';
+    }
+
+    setPass(pass){
+        // TREBUIE VERIFICAT DACA NU E EROARE DE SERVER
+        Swal.fire({
+            icon: 'success',
+            text: 'Password changed.',
+            confirmButtonColor: "#643754"
+          })
+        console.log('PAROLA NOUA', pass)
     }
 
     getBooks(){
@@ -29,7 +48,7 @@ class AjaxRequest {
 
     newBook(title, author, img, description){
         const formData = `title=${title}&author=${author}&img=${img}&description=${description}&ADD_BOOK=1`;
-        console.log(formData)
+        // console.log(formData)
         fetch(this.url_books + 'inserareRequest.php', {
             method: 'POST',
             headers: {
@@ -41,26 +60,6 @@ class AjaxRequest {
         })
         .then(res=>{
             responseData.getBooks()
-
-              Swal.fire({
-                title: 'Are you sure?',
-                text: "Do you want to add this book?",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#643754',
-                cancelButtonColor: '#904e79',
-                confirmButtonText: 'Yes, add it!'
-              }).then((result) => {
-                if (result.value) {
-                    Swal.fire({
-                    icon: 'success',
-                    text: 'Book successfully added.',
-                    confirmButtonColor: "#643754"
-                    })
-                    document.getElementById('title@').value = document.getElementById('author@').value = document.getElementById('img@').value = document.getElementById('descr@').value = '';
-                }
-              })
-
         })
         .catch(err=>{
             console.log(err)
@@ -114,7 +113,8 @@ class AjaxRequest {
             return response.json()
         })
         .then(res=>{
-            // console.log(res)
+            if(typeof(res.eroare) != 'undefined')
+                throw new Error(`occured, book can't be edited`);
             responseData.getBooks()
             Swal.fire({
                 icon: 'success',
@@ -127,7 +127,11 @@ class AjaxRequest {
               })
         })
         .catch(err=>{
-            console.log(err)
+            Swal.fire({
+                icon: 'error',
+                text: err,
+                confirmButtonColor: "#643754"
+              })
         })
     }
 }
@@ -145,6 +149,13 @@ const multipleBooksComponentDOM = (booksCpy = books) =>{
         booksCpy = books;
     let output = '';
     let nr = 0;
+    // console.log(booksCpy.length)
+    if(booksCpy.length == 0){
+        output +=
+        `<div class="bookUnselectedContainer text-center">
+            <h2>There are no books.</h2>
+        </div>`;
+    } else {
     booksCpy.forEach(book=>{
         output +=
            `<div id="book${book.id}" class="row bookUnselectedContainer">
@@ -162,7 +173,8 @@ const multipleBooksComponentDOM = (booksCpy = books) =>{
                     <button class="btn-like hideOnSmall"><img src="./images/heart.png" alt="heart"><p>${book.likes}</p></button>
                 </div>
             </div>`;
-    })
+        })
+    }
     window.scrollTo(0, 0);
     document.getElementById('all-books-component').innerHTML = output;
 }
@@ -224,24 +236,22 @@ function requestBookMiddleware(id){
 // INCARCAM TAMPLATE-UL PENTRU ACCOUNT (account-component)
 const accountComponentDOM =()=>{
     //TREBUIE LUAT DIN BAZA DE DATE !!!!!!!!!!!!!!!!!!!!!!!!!!
-    let account = {lname:'Vladiddddmir', fname:'Anfimov', email:'vladimir@gm.com', address:'Dimitire Dan 67C'};
     let output =
     `<div class="templateMiniContainer row">
         <div class="col-lg-6 col-sm-12 text-left">
             <div class="text-center text-lg-left">
                 <img class="user-photo img-fluid" src="./images//user-photo.png" alt="userphoto"><br>
-                    <button class="btn-style">Change photo</button>
+                    <button onclick="uploadAccountPhoto()" class="btn-style">Change photo</button>
             </div>
             <div class="m-3">
-                <h3 class="">Name: <span class="d-block d-lg-inline">${account.fname} ${account.lname}</span></h3>
+                <h3 class="">Name: <span class="d-block d-lg-inline">${account.name}</span></h3>
                 <h3 class="">Email: <span class="d-block d-lg-inline">${account.email}</span></h3>
                 <h3 class="">Address: <span class="d-block d-lg-inline">${account.address}</span></h3>
             </div>
         </div>
         <div class="col-lg-6 col-sm-12">
-            <button class="btn-style float-lg-right btn-style-width">Change account info</button><br/>
             <button class="btn-style float-lg-right btn-style-width">Last requests</button><br/>
-            <button class="btn-style float-lg-right btn-style-width">Change password</button><br/>
+            <button onclick="changePass()" class="btn-style float-lg-right btn-style-width">Change password</button><br/>
         </div>
     </div>`;
     document.getElementById('account-component').innerHTML = output;
@@ -287,8 +297,8 @@ const requestsComponentDOM = () => {
     let output = '';
     requests.forEach(req=>{
             output += 
-           `<div onclick="slideFunc(${req.id})" style="margin:8px 0">
-           <div class="requestsList-item" id="req${req.id}">
+           `<div style="margin:8px 0">
+           <div onclick="slideFunc(${req.id})" class="requestsList-item" id="req${req.id}">
                 <div>Book: ${req.book}</div>
                 <div>Date: ${req.date}</div>
                 <div>Status: ${req.status}</div>
@@ -316,14 +326,34 @@ const requestsComponentDOM = () => {
 
 // ACCEPT REQUEST FUNCTION
 function acceptRequest(id){
-    console.log('accept', id)
-    requestObject = new AjaxRequest()
-    requestObject.showReq()
+    Swal.fire({
+        text: "Are you sure you want to accept this request?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#643754',
+        cancelButtonColor: '#904e79',
+        confirmButtonText: 'Yes, accept it!'
+      }).then((result) => {
+        if (result.value) {
+            console.log('accept', id)
+        }
+      })
 }
 
 // DECLINE REQUEST FUNCTION
 function declineRequest(id){
-    console.log('decline', id)
+    Swal.fire({
+        text: "Are you sure you want to decline this request?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#643754',
+        cancelButtonColor: '#904e79',
+        confirmButtonText: 'Yes, decline it!'
+      }).then((result) => {
+        if (result.value) {
+            console.log('decline', id)
+        }
+      })
 }
 
 // SLIDE FUNC (ARATA DETALIILE REQUESTULUI CAND APESI PE REQ RESEPECTIV)
@@ -403,16 +433,34 @@ document.getElementById('search-val').addEventListener('input', ()=>{
 
 // LISTEN TO NEW BOOK SUBMIT
 document.getElementById('newBookSubmit').addEventListener('submit',()=>{
-    const props = {
-        title: document.getElementById('title@').value,
-        author: document.getElementById('author@').value,
-        img: document.getElementById('img@').value,
-        descr: document.getElementById('descr@').value
-    }
-    const requestObject = new AjaxRequest()
-    requestObject.newBook(props.title, props.author, props.img, props.descr) 
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "Do you want to add this book?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#643754',
+        cancelButtonColor: '#904e79',
+        confirmButtonText: 'Yes, add it!'
+      }).then((result) => {
+        if (result.value) {
+            Swal.fire({
+            icon: 'success',
+            text: 'Book successfully added.',
+            confirmButtonColor: "#643754"
+            })
+            const props = {
+                title: document.getElementById('title@').value,
+                author: document.getElementById('author@').value,
+                img: document.getElementById('img@').value,
+                descr: document.getElementById('descr@').value
+            }
+            responseData.newBook(props.title, props.author, props.img, props.descr)
+            document.getElementById('title@').value = document.getElementById('author@').value = document.getElementById('img@').value = document.getElementById('descr@').value = '';
+        }
+      }) 
 })
 
+// MIDDLEWARE FOR DELETE
 function deleteBookFunc(id){
     Swal.fire({
         title: 'Are you sure?',
@@ -426,7 +474,7 @@ function deleteBookFunc(id){
         if (result.value) {
             const new_id = id.slice(12)
             responseData.deleteBook(new_id);
-            console.log(new_id)
+            // console.log(new_id)
         }
       })
     
@@ -443,6 +491,60 @@ function editBookSumbit(id){
         available: document.getElementById('available@ed').value
     }
     // console.log(props.available)
-    const requestObject = new AjaxRequest()
-    requestObject.editBook(props.id, props.title, props.author, props.img, props.descr, props.available) 
+    responseData.editBook(props.id, props.title, props.author, props.img, props.descr, props.available) 
+}
+
+async function uploadAccountPhoto(){
+    const { value: url } = await Swal.fire({
+        input: 'url',
+        inputPlaceholder: 'Enter the URL',
+        confirmButtonColor: "#643754"
+      })
+      if (url) {
+        Swal.fire({
+            icon: 'success',
+            text: 'Photo changed.',
+            confirmButtonColor: "#643754"
+          })
+      }
+}
+
+async function changePass() {
+    const { value: password } = await Swal.fire({
+        title: 'Enter your current password',
+        input: 'password',
+        inputPlaceholder: 'Enter your password',
+        confirmButtonColor: "#643754",
+        inputAttributes: {
+          maxlength: 20,
+          autocapitalize: 'off',
+          autocorrect: 'off'
+        },
+        inputValidator: (value) => {
+            if (value !== responseData.checkPass()) {
+              return `Password doesn't match!`
+            }
+          }
+      })
+      
+      if (password) {
+        const { value2: password2 } = Swal.fire({
+            title: 'Enter your new password',
+            input: 'password',
+            inputPlaceholder: 'Enter your new password',
+            confirmButtonColor: "#643754",
+            inputAttributes: {
+              maxlength: 20,
+              autocapitalize: 'off',
+              autocorrect: 'off'
+            },
+            inputValidator: (value2) => {
+                if (value2 == responseData.checkPass()) {
+                  return `New password can't pe the same!`;
+                }
+                else 
+                    responseData.setPass(value2)
+              }
+          })
+      }
 }
