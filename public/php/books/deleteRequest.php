@@ -2,7 +2,7 @@
 
 	session_start();
 	
-	if(isset($_POST['DELETE_BOOK']) && !empty($_POST['id']) && /*isset($_SESSION['admin']) && $_SESSION['admin'] == 1 */)
+	if(isset($_POST['DELETE_BOOK']) && !empty($_POST['id']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1)
 	{
 
 		include '../connect.php';

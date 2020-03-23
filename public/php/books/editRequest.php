@@ -1,7 +1,7 @@
 <?php
 
 
-if(isset($_POST['UPDATE_BOOK'])  && !empty($_POST['title'])  && !empty($_POST['author'])  && !empty($_POST['description'])  && isset($_POST['available'])  && !empty($_POST['img']) && !empty($_POST['id']) /*&&  isset($_SESSION['admin']) && $_SESSION['admin'] == 1*/)
+if(isset($_POST['UPDATE_BOOK'])  && !empty($_POST['title'])  && !empty($_POST['author'])  && !empty($_POST['description'])  && isset($_POST['available'])  && !empty($_POST['img']) && !empty($_POST['id']) &&  isset($_SESSION['admin']) && $_SESSION['admin'] == 1)
 {
 	include '../connect.php';
 
