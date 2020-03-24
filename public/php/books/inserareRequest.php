@@ -5,7 +5,7 @@
 	//if($_SESSION['admin'] == 1)
 		//echo 1;
 
-	if(!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['description']) && !empty($_POST['img']) && isset($_POST['ADD_BOOK']) /*&&  isset($_SESSION['admin']) && $_SESSION['admin'] == 1*/  )
+	if(!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['description']) && !empty($_POST['img']) && isset($_POST['ADD_BOOK']) &&  isset($_SESSION['admin']) && $_SESSION['admin'] == 1  )
 	{
 
 		$author = $_POST['author'];
