@@ -90,7 +90,7 @@
                     <option value="4">4 weeks</option>
                 </select>
                 <h4>Your phone number</h4>
-                <input id="phone!" type="number" required size="10"><br />
+                <input id="phone!" type="number" required class="txtFontRepair" size="10"><br />
                 <button class="btn-style">Request book</button>
             </form>
         </div>

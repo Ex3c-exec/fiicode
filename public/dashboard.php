@@ -11,6 +11,7 @@
     }
 ?>
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,7 +23,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/dashboard.css"/>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <title>Dashboard Admin</title>
+    <title>Dashboard</title>
 </head>
 <body>
 
@@ -42,7 +43,6 @@
             <a class="mobileNavLinks" style="margin:2px 0" href="#multiple-books-component">Books</a>
             <a class="mobileNavLinks" style="margin:2px 0" href="#account-component">Account</a>
             <a class="mobileNavLinks" href="./php/logout.php">Logout</a>
-        </ul>
         </div>
         </div>
         <nav class="navbar navbar-light" style="background-color: #D6F1C1;">
@@ -76,17 +76,17 @@
 
         <div class="templateMiniContainer">
             <h1>Request form</h1>
-            <form>
+            <form id="requestFormSubmit">
                 <h4>When could you give it back?</h4>
-                <select id="###///" required>
-                    <option value="0w">Less than a week</option>
-                    <option value="1w">1 week</option>
-                    <option value="2w">2 weeks</option>
-                    <option value="3w">3 weeks</option>
-                    <option value="4w">4 weeks</option>
+                <select id="term!" required>
+                    <option value="0">Less than a week</option>
+                    <option value="1">1 week</option>
+                    <option value="2">2 weeks</option>
+                    <option value="3">3 weeks</option>
+                    <option value="4">4 weeks</option>
                 </select>
                 <h4>Your phone number</h4>
-                <input type="number" required size="10"><br />
+                <input id="phone!" type="number" required size="10" class="txtFontRepair"><br />
                 <button class="btn-style">Request book</button>
             </form>
         </div>

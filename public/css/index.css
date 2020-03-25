@@ -190,7 +190,7 @@ footer {
     bottom: 0;
     width: 100%;
     height: 3vh;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 0;
     text-align: center;
     
 }
@@ -245,11 +245,11 @@ input {
     transition: background-color 0.5s;
 }
 
-input[type="text"] {
+.msgInp {
     height: 7rem;
 }
 
-input[type="email"] {
+.restInp {
     height: 3rem;
 }
 
@@ -360,7 +360,7 @@ input:focus::placeholder {
        height: 15vw;
    }
    .goBackUpButton {
-    top: 115vw;
+    top:80vh;
     right: 43vw;
     }
     input {

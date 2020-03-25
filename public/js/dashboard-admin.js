@@ -319,7 +319,7 @@ const multipleBooksComponentDOM = (booksCpy = books) =>{
                 <div class="col-lg-2 col-sm-12 hideOnSmall">
                     <img src="${book.img}" alt="book" class="img-thumbnail">
                 </div>
-                <div class="col-lg-9 col-sm-9">
+                <div class="col-lg-9 col-sm-12">
                     <h2>Title:“${book.title}”</h2>
                     <h4>Author:${book.author}</h4>
                     <h4>Description:</h4>
@@ -353,7 +353,7 @@ const singleBookComponentDOM = (bookId) => {
             <div class="col-lg-2 col-sm-12">
                 <img src="${selectedBook.img}" alt="book" class="img-thumbnail-unic">
             </div>
-            <div class="col-lg-9 col-sm-9">
+            <div class="col-lg-9 col-sm-12">
                 <h2>Title: “${selectedBook.title}”</h2>
                 <h4>Author: ${selectedBook.author}</h4>
                 <h4>Description:</h4>
@@ -448,7 +448,7 @@ const editBookComponentDOM =(id)=>{
 
 const showStatus = (prop) =>{
     if(prop == 0)
-        return 'pending';
+        return '<span style="color:#904e79;">pending</span>';
     else if(prop == -1)
         return 'declined';
     else if(prop == 1)
@@ -462,9 +462,9 @@ const showTerm = (prop) =>{
     if(prop == 0)
         return 'Less than a week';
     else if(prop == 1)
-        return prop + ' week';
+        return `<span class="txtFontRepair">` + prop + `</span>` + ' week';
     else
-        return prop + ' weeks';
+        return `<span class="txtFontRepair">` + prop + `</span>` + ' weeks';
 }
 
 // INCARCAM TAMPLATE-UL PENTRU REQUESTS (requests-component)
@@ -478,9 +478,9 @@ const requestsComponentDOM = () => {
                 output += 
             `<div style="margin:8px 0">
             <div onclick="slideFunc(${req.id})" class="requestsList-item" id="req${req.id}">
-                    <div>Book: ${req.book}</div>
-                    <div>Date: ${req.date}</div>
-                    <div>Status: ` + showStatus(req.status) + `</div>
+                    <div><u>Book</u>: ${req.book}</div>
+                    <div><u>Date</u>: <span class="txtFontRepair">${req.date}</span></div>
+                    <div><u>Status</u>: ` + showStatus(req.status) + `</div>
                 </div>
                     <div id="slide${req.id}" style="display:none" class="requestsList-item">
                         <div>
@@ -489,7 +489,7 @@ const requestsComponentDOM = () => {
                             <p>Address: ${req.address} </p>
                         </div>
                         <div>
-                            <p>Phone: ${req.phone}</p>
+                            <p>Phone: <span class="txtFontRepair">${req.phone}</span></p>
                             <p>Term: `+ showTerm(req.termen) +` </p>
                         </div>
                         <div>
@@ -744,6 +744,7 @@ document.getElementById('requestFormSubmit').addEventListener('submit', (e)=>{
 function showPersReq(){
     Swal.fire({
         text:'Requests',
+        confirmButtonColor: "#643754",
         html: personalRequests.map(req=>{
             return `<ul class="list-group">
             <li class="list-group-item">Book: ${req.book}</li>

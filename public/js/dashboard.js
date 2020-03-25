@@ -1,10 +1,19 @@
 // VARIABILE GLOBALE
 let books = []
+let requests = []
+let account = {
+    name:'',
+    email:'',
+    address: ''
+}
+let personalRequests = [];
 
 // REQUESTS CLASS FOR GLOBAL DATA
 class AjaxRequest {
     constructor(){
         this.url_books = './php/books/';
+        this.url_account = './php/account/',
+        this.url_requests = './php/requests/';
     }
 
     getBooks(){
@@ -21,18 +30,131 @@ class AjaxRequest {
             console.log(err)
         })
     }
+
+
+    getAccount(){
+        const type = 'ACCOUNT_REQUEST'
+        fetch(this.url_account + 'contRequest.php?' + type)
+        .then(response=>{
+            return response.json()
+        })
+        .then(res=>{
+            if(typeof(res.eroare) != 'undefined')
+                {
+                    console.log(res)
+                    throw new Error(`occured, account can't be found`);
+                }
+            // console.log(res)
+            account = {
+                name: res.first + " " + res.last,
+                email:res.email,
+                address: res.address
+            }
+            accountComponentDOM()
+        })
+        .catch(err=>{
+            Swal.fire({
+                icon: 'error',
+                text: err,
+                confirmButtonColor: "#643754"
+              })
+        })
+    }
+
+    setPass(pass){
+        const formData = `pass=${pass}&SET_PASS`;
+        fetch(this.url_account + 'setPassRequest.php', {
+            method:'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'
+            },
+            body: formData
+        })
+        .then(response=>{
+            return response.json()
+        })
+        .then(res=>{
+            if(typeof(res.eroare) != 'undefined'){
+                console.log(res)
+                throw new Error(`occured, password can't be set`);
+            }
+            Swal.fire({
+                icon: 'success',
+                text: 'Password changed.',
+                confirmButtonColor: "#643754"
+          })
+        })
+        .catch(err=>{
+            console.log(err)
+            Swal.fire({
+                icon: 'error',
+                text: err,
+                confirmButtonColor: "#643754"
+              })
+        })
+    }
+
+    createRequest(phone, term, id, email){
+        const book = books.find(book=> book.id == id).title;
+        const formData = `term=${term}&phone=${phone}&email=${email}&book=${book}&CREATE_REQUEST`;
+        console.log(formData)
+        fetch(this.url_requests + 'create.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'
+            },
+            body: formData
+        }).then(response=>{
+            return response.json()
+        })
+        .then(res=>{
+            if(typeof(res.eroare) != 'undefined')
+                    throw new Error(res.eroare);
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'Request successfully made.',
+                        confirmButtonColor: "#643754"
+                  }).then(()=>{
+                    changeHref(`single-book-component/${id}`);
+                  })
+        })
+        .catch(err=>{
+            Swal.fire({
+                icon: 'error',
+                text: err,
+                confirmButtonColor: "#643754"
+              })
+        })
+    }
+
+    getPersonalRequests(){
+        // console.log(account.email)
+        fetch(this.url_requests + `personalRequests.php?email=${account.email}&PERS_REQUESTS`)
+        .then(response=>{
+            return response.json()
+        })
+        .then(res=>{
+            if(typeof(res.eroare) != 'undefined')
+                    throw new Error(res.eroare);
+            console.log(res)
+            personalRequests = res;
+        })
+        .catch(err=>{
+            Swal.fire({
+                icon: 'error',
+                text: err,
+                confirmButtonColor: "#643754"
+              })
+        })
+    }
 }
 
 const responseData = new AjaxRequest()
 
-//  SCHIMBAM HREF-UL
-const changeHref = (href)=>{
-    window.location.replace('#' + href)
-}
-
 // ONLOAD SET VARIBLES
 document.addEventListener('DOMContentLoaded', ()=>{
     responseData.getBooks()
+    responseData.getAccount()
 });
 
 // INCARCAM TAMPLATE-UL PENTRU CARTI (multiple-books-component)
@@ -41,13 +163,20 @@ const multipleBooksComponentDOM = (booksCpy = books) =>{
         booksCpy = books;
     let output = '';
     let nr = 0;
+    // console.log(booksCpy.length)
+    if(booksCpy.length == 0){
+        output +=
+        `<div class="bookUnselectedContainer text-center">
+            <h2>There are no books.</h2>
+        </div>`;
+    } else {
     booksCpy.forEach(book=>{
         output +=
            `<div id="book${book.id}" class="row bookUnselectedContainer">
                 <div class="col-lg-2 col-sm-12 hideOnSmall">
                     <img src="${book.img}" alt="book" class="img-thumbnail">
                 </div>
-                <div class="col-lg-9 col-sm-9">
+                <div class="col-lg-9 col-sm-12">
                     <h2>Title:“${book.title}”</h2>
                     <h4>Author:${book.author}</h4>
                     <h4>Description:</h4>
@@ -58,7 +187,8 @@ const multipleBooksComponentDOM = (booksCpy = books) =>{
                     <button class="btn-like hideOnSmall"><img src="./images/heart.png" alt="heart"><p>${book.likes}</p></button>
                 </div>
             </div>`;
-    })
+        })
+    }
     window.scrollTo(0, 0);
     document.getElementById('all-books-component').innerHTML = output;
 }
@@ -80,7 +210,7 @@ const singleBookComponentDOM = (bookId) => {
             <div class="col-lg-2 col-sm-12">
                 <img src="${selectedBook.img}" alt="book" class="img-thumbnail-unic">
             </div>
-            <div class="col-lg-9 col-sm-9">
+            <div class="col-lg-9 col-sm-12">
                 <h2>Title: “${selectedBook.title}”</h2>
                 <h4>Author: ${selectedBook.author}</h4>
                 <h4>Description:</h4>
@@ -117,29 +247,46 @@ function requestBookMiddleware(id){
 
 // INCARCAM TAMPLATE-UL PENTRU ACCOUNT (account-component)
 const accountComponentDOM =()=>{
-    //TREBUIE LUAT DIN BAZA DE DATE !!!!!!!!!!!!!!!!!!!!!!!!!!
-    let account = {lname:'Vladiddddmir', fname:'Anfimov', email:'vladimir@gm.com', address:'Dimitire Dan 67C'};
     let output =
     `<div class="templateMiniContainer row">
         <div class="col-lg-6 col-sm-12 text-left">
             <div class="text-center text-lg-left">
                 <img class="user-photo img-fluid" src="./images//user-photo.png" alt="userphoto"><br>
-                    <button class="btn-style">Change photo</button>
             </div>
             <div class="m-3">
-                <h3 class="">Name: <span class="d-block d-lg-inline">${account.fname} ${account.lname}</span></h3>
+                <h3 class="">Name: <span class="d-block d-lg-inline">${account.name}</span></h3>
                 <h3 class="">Email: <span class="d-block d-lg-inline">${account.email}</span></h3>
                 <h3 class="">Address: <span class="d-block d-lg-inline">${account.address}</span></h3>
             </div>
         </div>
         <div class="col-lg-6 col-sm-12">
-            <button class="btn-style float-lg-right btn-style-width">Last requests</button><br/>
-            <button class="btn-style float-lg-right btn-style-width">Change password</button><br/>
+            <button onclick="showPersReq()" class="btn-style float-lg-right btn-style-width">Last requests</button><br/>
+            <button onclick="changePass()" class="btn-style float-lg-right btn-style-width">Change password</button><br/>
         </div>
     </div>`;
     document.getElementById('account-component').innerHTML = output;
+} 
+
+const showStatus = (prop) =>{
+    if(prop == 0)
+        return '<span style="color:#904e79;">pending</span>';
+    else if(prop == -1)
+        return 'declined';
+    else if(prop == 1)
+        return  'accepted';
+    else
+        return 'error occured';
 }
 
+const showTerm = (prop) =>{
+    // console.log(prop)
+    if(prop == 0)
+        return 'Less than a week';
+    else if(prop == 1)
+        return prop + ' week';
+    else
+        return prop + ' weeks';
+}
 
 // VERIFICAM CE OBIECT TREBUIE CERUT DE LA SERVER SI IL ACTUALIZAM PT AL AVEA IN MEMORIE
 const checkObjectData = (component) => {
@@ -154,6 +301,7 @@ const checkObjectData = (component) => {
     }
     else if(component == 'account-component'){
         accountComponentDOM();
+        responseData.getPersonalRequests()
     }
 }
 
@@ -182,6 +330,11 @@ window.addEventListener('hashchange', ()=>{
     componentSelector(href)
 })
 
+//  SCHIMBAM HREF-UL
+const changeHref = (href)=>{
+    window.location.replace('#' + href)
+}
+
 // SEARCH BAR PENTRU CARTI (multiple-books-component)
 document.getElementById('search-val').addEventListener('input', ()=>{
     const search = document.getElementById('search-val').value;
@@ -193,3 +346,84 @@ document.getElementById('search-val').addEventListener('input', ()=>{
 
     multipleBooksComponentDOM(booksCpy)
 })
+
+async function changePass() {
+    Swal.fire({
+        title: 'Enter your current password',
+        input: 'password',
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        confirmButtonColor: "#643754",
+        showLoaderOnConfirm: true,
+        cancelButtonColor: '#904e79',
+        preConfirm: (pass) => {
+          console.log(pass)
+          return fetch(`./php/account/checkPassRequest.php`,{
+              method: 'POST',
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded'
+                },
+                body: `CHECK_PASS=1&pass=${pass}`
+            })
+            .then(response => {
+              return response.json()
+            })
+            .then(async(res)=>{
+                if (typeof(res.eroare) != 'undefined') {
+                    throw new Error('not match pass');
+                }
+                const { value: pass } = await Swal.fire({
+                    title: 'Enter your new password',
+                    input: 'password',
+                    inputPlaceholder: 'Enter new password',
+                    confirmButtonColor: "#643754"
+                  })
+                  if (pass) 
+                      responseData.setPass(pass)
+            })
+            .catch(error => {
+              Swal.showValidationMessage(
+                `Password doesn't match.`
+              )
+              console.log(error)
+            })
+        },
+      })
+}
+
+document.getElementById('requestFormSubmit').addEventListener('submit', (e)=>{
+    e.preventDefault()
+    const dataReq = {
+        phone: document.getElementById('phone!').value,
+        term: document.getElementById('term!').value,
+        id: window.location.hash.slice(19)
+    }
+    if(dataReq.phone.length != 10 || dataReq.phone[0] != 0 || dataReq.phone[1] != 7) {
+        Swal.fire({
+            icon: 'error',
+            text: "Phone number is not valid",
+            confirmButtonColor: "#643754"
+          })
+    }
+    else
+        responseData.createRequest(dataReq.phone, dataReq.term, dataReq.id, account.email)
+
+})
+
+function showPersReq(){
+    Swal.fire({
+        text:'Requests',
+        confirmButtonColor: "#643754",
+        html: personalRequests.length != 0 ? (personalRequests.map(req=>{
+            return `<ul class="list-group">
+            <li class="list-group-item">Book: ${req.book}</li>
+            <li class="list-group-item">Term: `+ showTerm(req.termen) +`</li>
+            <li class="list-group-item">Status: ` + showStatus(req.status) + `</li>
+            <li class="list-group-item">Date: ${req.date}</li>
+          </ul>`
+        }) ) : (`<h4>Here are no requests</h4>`)
+        })
+}

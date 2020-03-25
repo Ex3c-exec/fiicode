@@ -19,7 +19,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="./css/home.css" />
+    <link rel="stylesheet" type="text/css" href="./css/index.css" />
     <title>Welcome</title>
 </head>
 <body>
@@ -95,9 +95,9 @@
     <div class="title">
         <h1>Contact us</h1>
         <form id="contactForm" method = "POST" action="">
-            <input placeholder="Name..." type="text" name="name" required>
-            <input placeholder="Email..." type="email" name="email" required>
-            <input placeholder="Message..." type="text" name="message" required>
+            <input placeholder="Name..." type="text" name="name" class="restInp" required>
+            <input placeholder="Email..." type="email" name="email" class="restInp" required>
+            <input placeholder="Message..." type="text" class="msgInp" name="message" required>
             <button type="submit" name="submit" value="submit">Submit</button>
         </form>
     </div>
