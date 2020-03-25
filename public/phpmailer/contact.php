@@ -14,7 +14,7 @@
         $mail->setFrom($_POST['email'], $_POST['name']); // From email and name
         $mail->addAddress('fiicodebooksemail@gmail.com', 'FiiCode'); // to email and name
         $mail->Subject = 'Contact@Form';
-        $mail->msgHTML("Email: ".$_POST['email']."<br>".$_POST['message']); //$mail->msgHTML(file_get_contents('contents.html'), __DIR__); //Read an HTML message body from an external file, convert referenced images to embedded,
+        $mail->msgHTML("Email: ".$_POST['email']." <br>".$_POST['message']); //$mail->msgHTML(file_get_contents('contents.html'), __DIR__); //Read an HTML message body from an external file, convert referenced images to embedded,
         $mail->AltBody = 'HTML messaging not supported'; // If html emails is not supported by the receiver, show this body
         // $mail->addAttachment('images/phpmailer_mini.png'); //Attach an image file
         $mail->SMTPOptions = array(

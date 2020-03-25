@@ -30,6 +30,7 @@ class AjaxRequest {
             console.log(err)
         })
     }
+    
 
     newBook(title, author, img, description){
         const formData = `title=${title}&author=${author}&img=${img}&description=${description}&ADD_BOOK=1`;
