@@ -80,17 +80,17 @@
 
         <div class="templateMiniContainer">
             <h1>Request form</h1>
-            <form>
+            <form id="requestFormSubmit">
                 <h4>When could you give it back?</h4>
-                <select id="###///" required>
-                    <option value="0w">Less than a week</option>
-                    <option value="1w">1 week</option>
-                    <option value="2w">2 weeks</option>
-                    <option value="3w">3 weeks</option>
-                    <option value="4w">4 weeks</option>
+                <select id="term!" required>
+                    <option value="0">Less than a week</option>
+                    <option value="1">1 week</option>
+                    <option value="2">2 weeks</option>
+                    <option value="3">3 weeks</option>
+                    <option value="4">4 weeks</option>
                 </select>
                 <h4>Your phone number</h4>
-                <input type="number" required size="10"><br />
+                <input id="phone!" type="number" required class="txtFontRepair" size="10"><br />
                 <button class="btn-style">Request book</button>
             </form>
         </div>

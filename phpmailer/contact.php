@@ -9,10 +9,10 @@
         $mail->Port = 587; // TLS only
         $mail->SMTPSecure = 'tls'; // ssl is deprecated
         $mail->SMTPAuth = true;
-        $mail->Username = ''; // email
-        $mail->Password = ''; // password
+        $mail->Username = 'fiicodebooksemail@gmail.com'; // email
+        $mail->Password = 'fiicodeemail'; // password
         $mail->setFrom($_POST['email'], $_POST['name']); // From email and name
-        $mail->addAddress('', 'Nicolae'); // to email and name
+        $mail->addAddress('fiicodebooksemail@gmail.com', 'FiiCode'); // to email and name
         $mail->Subject = 'Contact@Form';
         $mail->msgHTML("Email: ".$_POST['email']."<br>".$_POST['message']); //$mail->msgHTML(file_get_contents('contents.html'), __DIR__); //Read an HTML message body from an external file, convert referenced images to embedded,
         $mail->AltBody = 'HTML messaging not supported'; // If html emails is not supported by the receiver, show this body

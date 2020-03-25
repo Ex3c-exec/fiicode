@@ -17,7 +17,7 @@ if(isset($_POST["SET_PASS"]) && !empty($_POST['pass'])  && $_SESSION['email'] )
 	    $success = array("success" => "success set pass");
 		echo JSON_encode($success);
 	} else {
-	    $error = array("eroare" => "eroare set book");
+	    $error = array("eroare" => "eroare set pass");
 		echo JSON_encode($error);
 	}
 
@@ -25,6 +25,6 @@ if(isset($_POST["SET_PASS"]) && !empty($_POST['pass'])  && $_SESSION['email'] )
 }
 else
 	{
-		$error = array("eroare" => "eroare update book");
+		$error = array("eroare" => "eroare set pass");
 		echo JSON_encode($error);
 	}

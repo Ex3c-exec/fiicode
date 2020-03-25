@@ -1,34 +1,19 @@
 // VARIABILE GLOBALE
 let books = []
-let requests = [
-    {id:1, book:"Povestile lui Ilie", date:'12-03-2020', status:'pending', name:"Anfimov Vladimir", email:'vladimir@yahoo.com',address:'Dimitrie Dan 67c', phone:'073039302', term:'2 weeks'},
-    {id:2, book:"Calea de aur", date:'11-11-2020', status:'declined', name:"Tania Miri", email:'Tania@yahoo.com',address:'Magrule 32c', phone:'072033443', term:'1 weeks'},
-    {id:3, book:"La vanitr de mure", date:'11-11-2024', status:'pending', name:"Sarmua Lara", email:'Gigelia@yahoo.com',address:'Tiganai 23b', phone:'082222222', term:'1 weeks'}
-]
+let requests = []
 let account = {
-    name:"Anfimov Vladimir",
-    email:"vladymir100@gmail.com",
-    address: 'Dimitire Dan 67C'
+    name:'',
+    email:'',
+    address: ''
 }
+let personalRequests = [];
 
 // REQUESTS CLASS FOR GLOBAL DATA
 class AjaxRequest {
     constructor(){
         this.url_books = './php/books/';
-    }
-
-    checkPass(){
-        return 'parola';
-    }
-
-    setPass(pass){
-        // TREBUIE VERIFICAT DACA NU E EROARE DE SERVER
-        Swal.fire({
-            icon: 'success',
-            text: 'Password changed.',
-            confirmButtonColor: "#643754"
-          })
-        console.log('PAROLA NOUA', pass)
+        this.url_account = './php/account/',
+        this.url_requests = './php/requests/';
     }
 
     getBooks(){
@@ -101,9 +86,9 @@ class AjaxRequest {
     }
 
     editBook(id, title, author, img, description, available){
-        // console.log(id, title, author, img, description)
         const formData = `id=${id}&title=${title}&author=${author}&img=${img}&description=${description}&available=${available}&UPDATE_BOOK=1`;
-        fetch(this.url_books + 'editRequest.php', {
+        console.log(formData)
+        fetch(this.url_books + 'editRequest.php?', {
             method: 'POST',
             headers: {
                 'Content-Type':'application/x-www-form-urlencoded'
@@ -114,7 +99,10 @@ class AjaxRequest {
         })
         .then(res=>{
             if(typeof(res.eroare) != 'undefined')
-                throw new Error(`occured, book can't be edited`);
+                {
+                    console.log(res)
+                    throw new Error(`occured, book can't be edited`);
+                }
             responseData.getBooks()
             Swal.fire({
                 icon: 'success',
@@ -134,6 +122,174 @@ class AjaxRequest {
               })
         })
     }
+
+    getAccount(){
+        const type = 'ACCOUNT_REQUEST'
+        fetch(this.url_account + 'contRequest.php?' + type)
+        .then(response=>{
+            return response.json()
+        })
+        .then(res=>{
+            if(typeof(res.eroare) != 'undefined')
+                {
+                    console.log(res)
+                    throw new Error(`occured, account can't be found`);
+                }
+            // console.log(res)
+            account = {
+                name: res.first + " " + res.last,
+                email:res.email,
+                address: res.address
+            }
+            accountComponentDOM()
+        })
+        .catch(err=>{
+            Swal.fire({
+                icon: 'error',
+                text: err,
+                confirmButtonColor: "#643754"
+              })
+        })
+    }
+
+    setPass(pass){
+        const formData = `pass=${pass}&SET_PASS`;
+        fetch(this.url_account + 'setPassRequest.php', {
+            method:'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'
+            },
+            body: formData
+        })
+        .then(response=>{
+            return response.json()
+        })
+        .then(res=>{
+            if(typeof(res.eroare) != 'undefined'){
+                console.log(res)
+                throw new Error(`occured, password can't be set`);
+            }
+            Swal.fire({
+                icon: 'success',
+                text: 'Password changed.',
+                confirmButtonColor: "#643754"
+          })
+        })
+        .catch(err=>{
+            console.log(err)
+            Swal.fire({
+                icon: 'error',
+                text: err,
+                confirmButtonColor: "#643754"
+              })
+        })
+    }
+
+    getRequests(){
+        const type = 'ALL_REQUESTS'
+        fetch(this.url_requests + 'returnRequest.php?' + type)
+        .then(response=>{
+            return response.json()
+        })
+        .then(res=>{
+            if(typeof(res.eroare) != 'undefined')
+                {
+                    console.log(res)
+                    throw new Error(`occured, can't get the requests`);
+                }
+            requests = res.sort();
+            // console.log(res)
+            requestsComponentDOM()
+        })
+        .catch(err=>{
+            Swal.fire({
+                icon: 'error',
+                text: err,
+                confirmButtonColor: "#643754"
+              })
+        })
+    }
+
+    createRequest(phone, term, id, email){
+        const book = books.find(book=> book.id == id).title;
+        const formData = `term=${term}&phone=${phone}&email=${email}&book=${book}&CREATE_REQUEST`;
+        console.log(formData)
+        fetch(this.url_requests + 'create.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'
+            },
+            body: formData
+        }).then(response=>{
+            return response.json()
+        })
+        .then(res=>{
+            if(typeof(res.eroare) != 'undefined')
+                    throw new Error(res.eroare);
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'Request successfully made.',
+                        confirmButtonColor: "#643754"
+                  }).then(()=>{
+                    changeHref(`single-book-component/${id}`);
+                  })
+        })
+        .catch(err=>{
+            Swal.fire({
+                icon: 'error',
+                text: err,
+                confirmButtonColor: "#643754"
+              })
+        })
+    }
+
+    administrateReq(id, new_status){
+        const formData = `id=${id}&${new_status}`;
+        console.log(formData)
+        fetch(this.url_requests + 'administration.php?', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/x-www-form-urlencoded'
+            },
+            body: formData
+        }).then(response=>{
+            return response.json()
+        })
+        .then(res=>{
+            if(typeof(res.eroare) != 'undefined')
+                    throw new Error(res.eroare);
+            console.log(res)
+            responseData.getRequests()
+        })
+        .catch(err=>{
+            Swal.fire({
+                icon: 'error',
+                text: err,
+                confirmButtonColor: "#643754"
+              })
+        })
+    }
+
+    getPersonalRequests(){
+        // console.log(account.email)
+        fetch(this.url_requests + `personalRequests.php?email=${account.email}&PERS_REQUESTS`)
+        .then(response=>{
+            return response.json()
+        })
+        .then(res=>{
+            if(typeof(res.eroare) != 'undefined')
+                    throw new Error(res.eroare);
+            console.log(res)
+            personalRequests = res;
+        })
+        .catch(err=>{
+            Swal.fire({
+                icon: 'error',
+                text: err,
+                confirmButtonColor: "#643754"
+              })
+        })
+    }
 }
 
 const responseData = new AjaxRequest()
@@ -141,6 +297,7 @@ const responseData = new AjaxRequest()
 // ONLOAD SET VARIBLES
 document.addEventListener('DOMContentLoaded', ()=>{
     responseData.getBooks()
+    responseData.getAccount()
 });
 
 // INCARCAM TAMPLATE-UL PENTRU CARTI (multiple-books-component)
@@ -162,7 +319,7 @@ const multipleBooksComponentDOM = (booksCpy = books) =>{
                 <div class="col-lg-2 col-sm-12 hideOnSmall">
                     <img src="${book.img}" alt="book" class="img-thumbnail">
                 </div>
-                <div class="col-lg-9 col-sm-9">
+                <div class="col-lg-9 col-sm-12">
                     <h2>Title:“${book.title}”</h2>
                     <h4>Author:${book.author}</h4>
                     <h4>Description:</h4>
@@ -196,7 +353,7 @@ const singleBookComponentDOM = (bookId) => {
             <div class="col-lg-2 col-sm-12">
                 <img src="${selectedBook.img}" alt="book" class="img-thumbnail-unic">
             </div>
-            <div class="col-lg-9 col-sm-9">
+            <div class="col-lg-9 col-sm-12">
                 <h2>Title: “${selectedBook.title}”</h2>
                 <h4>Author: ${selectedBook.author}</h4>
                 <h4>Description:</h4>
@@ -235,13 +392,11 @@ function requestBookMiddleware(id){
 
 // INCARCAM TAMPLATE-UL PENTRU ACCOUNT (account-component)
 const accountComponentDOM =()=>{
-    //TREBUIE LUAT DIN BAZA DE DATE !!!!!!!!!!!!!!!!!!!!!!!!!!
     let output =
     `<div class="templateMiniContainer row">
         <div class="col-lg-6 col-sm-12 text-left">
             <div class="text-center text-lg-left">
                 <img class="user-photo img-fluid" src="./images//user-photo.png" alt="userphoto"><br>
-                    <button onclick="uploadAccountPhoto()" class="btn-style">Change photo</button>
             </div>
             <div class="m-3">
                 <h3 class="">Name: <span class="d-block d-lg-inline">${account.name}</span></h3>
@@ -250,12 +405,12 @@ const accountComponentDOM =()=>{
             </div>
         </div>
         <div class="col-lg-6 col-sm-12">
-            <button class="btn-style float-lg-right btn-style-width">Last requests</button><br/>
+            <button onclick="showPersReq()" class="btn-style float-lg-right btn-style-width">Last requests</button><br/>
             <button onclick="changePass()" class="btn-style float-lg-right btn-style-width">Change password</button><br/>
         </div>
     </div>`;
     document.getElementById('account-component').innerHTML = output;
-}
+} 
 
 // INCARCAM TAMPLATE-UL PENTRU EDIT BOOK (edit-book-component)
 const editBookComponentDOM =(id)=>{
@@ -291,36 +446,60 @@ const editBookComponentDOM =(id)=>{
     document.getElementById('edit-book-component').innerHTML = output;
 }
 
+const showStatus = (prop) =>{
+    if(prop == 0)
+        return '<span style="color:#904e79;">pending</span>';
+    else if(prop == -1)
+        return 'declined';
+    else if(prop == 1)
+        return  'accepted';
+    else
+        return 'error occured';
+}
+
+const showTerm = (prop) =>{
+    // console.log(prop)
+    if(prop == 0)
+        return 'Less than a week';
+    else if(prop == 1)
+        return `<span class="txtFontRepair">` + prop + `</span>` + ' week';
+    else
+        return `<span class="txtFontRepair">` + prop + `</span>` + ' weeks';
+}
+
 // INCARCAM TAMPLATE-UL PENTRU REQUESTS (requests-component)
 const requestsComponentDOM = () => {
 
     let output = '';
-    requests.forEach(req=>{
-            output += 
-           `<div style="margin:8px 0">
-           <div onclick="slideFunc(${req.id})" class="requestsList-item" id="req${req.id}">
-                <div>Book: ${req.book}</div>
-                <div>Date: ${req.date}</div>
-                <div>Status: ${req.status}</div>
-            </div>
-                <div id="slide${req.id}" style="display:none" class="requestsList-item">
-                    <div>
-                        <p>Name: ${req.name}</p>
-                        <p>Email: ${req.email}</p>
-                        <p>Address: ${req.address} </p>
-                    </div>
-                    <div>
-                        <p>Phone: ${req.phone}</p>
-                        <p>Term: ${req.term} </p>
-                    </div>
-                    <div>
-                        <button onclick="acceptRequest(${req.id})" ${req.status != 'pending' ? ('style="display:none"'): ('')}>Accept</button><br />
-                        <button onclick="declineRequest(${req.id})" ${req.status != 'pending' ? ('style="display:none"'): ('')}>Decline</button>
-                    </div>
+    if(requests.length == 0)
+        output =`<div class="templateMiniContainer text-center" style="background-color:#D6F1C1; color:#643754; "><h2>Here are no requests.</h2></div>`;
+    else {
+        requests.forEach(req=>{
+                output += 
+            `<div style="margin:8px 0">
+            <div onclick="slideFunc(${req.id})" class="requestsList-item" id="req${req.id}">
+                    <div><u>Book</u>: ${req.book}</div>
+                    <div><u>Date</u>: <span class="txtFontRepair">${req.date}</span></div>
+                    <div><u>Status</u>: ` + showStatus(req.status) + `</div>
                 </div>
-            </div>`;
-    })
-    
+                    <div id="slide${req.id}" style="display:none" class="requestsList-item">
+                        <div>
+                            <p>Name: ${req.first_name} ${req.last_name}</p>
+                            <p>Email: ${req.email}</p>
+                            <p>Address: ${req.address} </p>
+                        </div>
+                        <div>
+                            <p>Phone: <span class="txtFontRepair">${req.phone}</span></p>
+                            <p>Term: `+ showTerm(req.termen) +` </p>
+                        </div>
+                        <div>
+                            <button onclick="acceptRequest(${req.id})" ${req.status != 0 ? ('style="display:none"'): ('')}>Accept</button><br />
+                            <button onclick="declineRequest(${req.id})" ${req.status != 0 ? ('style="display:none"'): ('')}>Decline</button>
+                        </div>
+                    </div>
+                </div>`;
+        })
+    }
     document.getElementById('requestsList').innerHTML = output;
 }
 
@@ -335,7 +514,7 @@ function acceptRequest(id){
         confirmButtonText: 'Yes, accept it!'
       }).then((result) => {
         if (result.value) {
-            console.log('accept', id)
+            responseData.administrateReq(id, 'ACCEPT_REQ');
         }
       })
 }
@@ -351,7 +530,7 @@ function declineRequest(id){
         confirmButtonText: 'Yes, decline it!'
       }).then((result) => {
         if (result.value) {
-            console.log('decline', id)
+            responseData.administrateReq(id, 'DECLINE_REQ');
         }
       })
 }
@@ -377,9 +556,11 @@ const checkObjectData = (component) => {
     }
     else if(component == 'account-component'){
         accountComponentDOM();
+        responseData.getPersonalRequests()
     }
     else if(component == 'requests-component'){
         requestsComponentDOM();
+        responseData.getRequests()
     }
     else if(component.includes('edit-book-component')){
         // PRELCUCRAM HASH-UL PT A SCOATE ID-UL
@@ -494,57 +675,83 @@ function editBookSumbit(id){
     responseData.editBook(props.id, props.title, props.author, props.img, props.descr, props.available) 
 }
 
-async function uploadAccountPhoto(){
-    const { value: url } = await Swal.fire({
-        input: 'url',
-        inputPlaceholder: 'Enter the URL',
-        confirmButtonColor: "#643754"
-      })
-      if (url) {
-        Swal.fire({
-            icon: 'success',
-            text: 'Photo changed.',
-            confirmButtonColor: "#643754"
-          })
-      }
-}
-
 async function changePass() {
-    const { value: password } = await Swal.fire({
+    Swal.fire({
         title: 'Enter your current password',
         input: 'password',
-        inputPlaceholder: 'Enter your password',
-        confirmButtonColor: "#643754",
         inputAttributes: {
-          maxlength: 20,
-          autocapitalize: 'off',
-          autocorrect: 'off'
+          autocapitalize: 'off'
         },
-        inputValidator: (value) => {
-            if (value !== responseData.checkPass()) {
-              return `Password doesn't match!`
-            }
-          }
-      })
-      
-      if (password) {
-        const { value2: password2 } = Swal.fire({
-            title: 'Enter your new password',
-            input: 'password',
-            inputPlaceholder: 'Enter your new password',
-            confirmButtonColor: "#643754",
-            inputAttributes: {
-              maxlength: 20,
-              autocapitalize: 'off',
-              autocorrect: 'off'
-            },
-            inputValidator: (value2) => {
-                if (value2 == responseData.checkPass()) {
-                  return `New password can't pe the same!`;
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        confirmButtonColor: "#643754",
+        showLoaderOnConfirm: true,
+        cancelButtonColor: '#904e79',
+        preConfirm: (pass) => {
+          console.log(pass)
+          return fetch(`./php/account/checkPassRequest.php`,{
+              method: 'POST',
+                headers: {
+                    'Content-Type':'application/x-www-form-urlencoded'
+                },
+                body: `CHECK_PASS=1&pass=${pass}`
+            })
+            .then(response => {
+              return response.json()
+            })
+            .then(async(res)=>{
+                if (typeof(res.eroare) != 'undefined') {
+                    throw new Error('not match pass');
                 }
-                else 
-                    responseData.setPass(value2)
-              }
+                const { value: pass } = await Swal.fire({
+                    title: 'Enter your new password',
+                    input: 'password',
+                    inputPlaceholder: 'Enter new password',
+                    confirmButtonColor: "#643754"
+                  })
+                  if (pass) 
+                      responseData.setPass(pass)
+            })
+            .catch(error => {
+              Swal.showValidationMessage(
+                `Password doesn't match.`
+              )
+              console.log(error)
+            })
+        },
+      })
+}
+
+document.getElementById('requestFormSubmit').addEventListener('submit', (e)=>{
+    e.preventDefault()
+    const dataReq = {
+        phone: document.getElementById('phone!').value,
+        term: document.getElementById('term!').value,
+        id: window.location.hash.slice(19)
+    }
+    if(dataReq.phone.length != 10 || dataReq.phone[0] != 0 || dataReq.phone[1] != 7) {
+        Swal.fire({
+            icon: 'error',
+            text: "Phone number is not valid",
+            confirmButtonColor: "#643754"
           })
-      }
+    }
+    else
+        responseData.createRequest(dataReq.phone, dataReq.term, dataReq.id, account.email)
+
+})
+
+function showPersReq(){
+    Swal.fire({
+        text:'Requests',
+        confirmButtonColor: "#643754",
+        html: personalRequests.map(req=>{
+            return `<ul class="list-group">
+            <li class="list-group-item">Book: ${req.book}</li>
+            <li class="list-group-item">Term: `+ showTerm(req.termen) +`</li>
+            <li class="list-group-item">Status: ` + showStatus(req.status) + `</li>
+            <li class="list-group-item">Date: ${req.date}</li>
+          </ul>`
+        }) 
+        })
 }

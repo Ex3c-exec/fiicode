@@ -15,7 +15,7 @@
 	    if(!mysqli_stmt_prepare($stmt,$sql))
 	    {
 	    	$err = array("eroare" => "eroare check pass server");
-	    	echo json_encode( $err);
+	    	echo json_encode($err);
 	    }
 	    else
 	    {
@@ -32,17 +32,17 @@
 	    		if($passwordCheck == false)
 	    		{
 	    			$err = array("eroare" => "nu corespund");
-	    		   echo json_encode( $err);
+	    		   echo json_encode($err);
 	    		}
 	    		else if($passwordCheck == true)
 	    		{	
 	    			$succ = array("success" => "corespund");
-				    echo json_encode( $succ);
+				    echo json_encode($succ);
 	    		}
 	    		else
 	    		{
 	    			$err = array("eroare" => "nu corespund");
-	    			echo json_encode( $err);
+	    			echo json_encode($err);
 	    		}
 	    	}
 	    	

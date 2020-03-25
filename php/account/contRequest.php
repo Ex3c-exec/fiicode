@@ -2,7 +2,7 @@
 	
 		session_start();
 
-		if(isset($_POST['ACCOUNT_REQUEST']) && isset($_SESSION['first']) )
+		if(isset($_GET['ACCOUNT_REQUEST']) && isset($_SESSION['first']) )
 		{
 		
 			//print_r($_SESSION);
@@ -19,7 +19,7 @@
 		}
 		else
 		{
-			$err = array("error" => "eroare cont request");
+			$err = array("eroare" => "eroare cont request");
 			echo json_encode($err);
 		}
 

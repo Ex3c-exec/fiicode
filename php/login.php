@@ -75,6 +75,7 @@
 	    			$_SESSION['last'] = $row['last_name'];
 	    			$_SESSION['address'] = $row['address'];
 	    			$_SESSION['admin'] = $row['admin'];
+	    			$_SESSION['id'] = $row['ID'];
 
 	    			if($_SESSION['admin'] == 1)
 	    			{
