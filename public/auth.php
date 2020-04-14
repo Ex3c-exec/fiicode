@@ -107,12 +107,21 @@
  
     <div id="forgot">
         <h3>Password recovery</h3>
-        <form id="recoverySubmit">
+        <form id="recoverySubmit" method="POST" action="php/reset-pass.php">
             <p>Email</p>
-            <input id="emailRecovery" type="email" required>
-            <button type="submit">Send</button>
+            <input id="emailRecovery" name="email" type="email" placeholder="Enter Email:..." required>
+            <button type="submit" name="submit">Send</button>
             <a href="#login">Do you know the password? Click here!</a>
         </form>
+        <?php
+        if(isset($_GET["reset"]))
+        {
+            if($_GET["reset"] == "success")
+            {
+                echo "Check your Email";
+            }
+        }
+        ?>
     </div>
  
  
