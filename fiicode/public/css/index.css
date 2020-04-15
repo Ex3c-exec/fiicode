@@ -1,0 +1,382 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+@media screen and (min-width: 800px){
+    #hideOnBig {
+        display: none;
+    }
+}
+
+@font-face {
+    font-family: Milestone;
+    src: url(MilestoneFont.otf);
+ }
+
+body {
+    background-color: #643754;
+}
+
+
+main, section, footer {
+    position: relative;
+    height: 100vh;
+}
+
+nav {
+    background-color: #D6F1C1;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+}
+
+li {
+    margin: 1rem 1.5rem;
+}
+
+.left {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.left img {
+    width: 8%;
+}
+
+.right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.title {
+    text-align: center;
+    animation: liniarOpacity 2s;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+h1 {
+    font-family: Milestone;
+    color: #D6F1C1;
+    font-size: 10rem;
+    font-weight: 100;
+    margin-bottom: 2rem;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+a {
+    text-decoration: none;
+    font-family: Milestone;
+    color: #643754;
+    font-size: 2.5rem;
+    transition: color 0.5s, text-shadow 0.5s;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #904e79;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);    
+}
+
+.welcomeContainer {
+    animation: liniarOpacity 2s;
+    width: 60%;
+    margin: auto;
+    font-family: Milestone;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.welcomeContainer div {
+    background-color: rgba(214, 241, 193, 0.15);
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.welcomeContainer img {
+    float: left;
+    width: 30%;
+    transform: translate(0, -40px) rotate(12deg);
+}
+
+h5 {
+    font-family: Milestone;
+    color: #D6F1C1;
+    font-weight: 100;
+    font-size: 3rem;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+button {
+    background-color: #D6F1C1;
+    font-family: Milestone;
+    color: #643754;
+    border: 0;
+    font-size: 2rem;
+    margin: 1rem;
+    padding: 0.7rem 2rem;
+    transition: background-color 0.5s, text-shadow 0.2s;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+button:hover {
+    background-color:#643754; 
+    color: #D6F1C1;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.reader {
+    width: 20%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    animation: liniarOpacity 2s;
+}
+
+section {
+    background-color: #D6F1C1;
+    display: flex;
+    flex-direction: column;
+}
+
+.art {
+    flex: 10%;
+    background-color: #643754;
+}
+
+.moreinfo {
+    margin: 0 10rem;
+    flex: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.moreinfo img {
+    width: 40%;
+}
+
+.moreinfo div {
+    margin: 5rem;
+    text-align: center;
+    transform: translate(0, -50px);
+}
+
+.moreinfo button {
+    background-color: #643754;
+    color: #D6F1C1;
+}
+
+.moreinfo button:hover {
+    background-color:#904e79; 
+    color: #D6F1C1;
+}
+
+footer {
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.realFooter{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 3vh;
+    box-shadow: 0 0 0;
+    text-align: center;
+    
+}
+
+.goBackUpButton {
+    border-radius: 35%;
+    position: absolute;
+    background-color: #D6F1C1;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    text-align: center;
+    top: 6vw;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    right: 8vw;
+}
+
+.arrow {
+    background-image: url(../images/arrow.png);
+    background-size:contain;
+    background-repeat: no-repeat;
+    margin: 10px;
+    color: transparent;
+}
+
+p {
+    font-family: Milestone;
+    color: #D6F1C1;
+    font-weight: 100;
+    font-size: 1rem;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #D6F1C1;
+    border: 0;
+    margin: 0.5rem auto;
+    width: 50%;
+    text-align: center;
+    font-family: Milestone;
+    color: #643754;
+    font-weight: 100;
+    font-size: 1.7rem;
+    transition: background-color 0.5s;
+}
+
+.msgInp {
+    height: 7rem;
+}
+
+.restInp {
+    height: 3rem;
+}
+
+input:focus {
+    outline: none;
+    background-color: rgb(228, 230, 227);
+}
+
+::placeholder {
+    font-family: Milestone;
+    color: #643754;
+    text-align: center;
+    font-weight: 100;
+    font-size: 1.7rem;
+    transition: color 0.3s;
+}
+
+input:focus::placeholder {
+    color: rgba(100, 55, 84, 0.2);
+  }
+
+
+
+/* MEDIA RULES FOR MEDIUM SCREEN */
+@media screen and (max-width: 1366px){
+    .left img {
+        width: 12%;
+    }
+
+    h5 {
+        font-size: 2rem;
+    }
+    
+    button {
+        font-size: 2rem;
+        margin: 1rem;
+        padding: 0.5rem 1.5rem;
+    }
+
+    .welcomeContainer img {
+        transform: translate(0, -30px) rotate(12deg);
+    }
+
+    .moreinfo {
+        margin: 0 2rem;
+        flex: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .moreinfo img {
+        width: 40%;
+    }
+    
+    .moreinfo div {
+        margin: 4rem;
+        text-align: center;
+        transform: translate(0, -50px);
+    }
+}
+
+/* SMALL SCREEN CONDITIONS */
+@media screen and (max-width: 800px){
+    .left, img, section, #hideOnSmall {
+        display: none;
+    }
+    .mobileNavLinks {
+        display: block;
+        padding: 2px;
+        font-size: 1.5rem;
+        color: #D6F1C1;
+        text-align: center;
+        box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+        background: #643754;
+        text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.10);
+    }
+
+    h1 {
+        font-size: 5rem;
+        margin-bottom: 2rem;
+    }
+    .welcomeContainer {
+        width: 80%;
+        margin: auto;
+        font-family: Milestone;
+        box-shadow: 0 0 0 0 transparent;
+    }
+    .welcomeContainer div {
+        background-color: transparent;
+        text-align: center;
+        padding: 0;
+    }
+    .buttonsGroupSmall {
+        display: flex;
+        justify-content: center;
+    }
+    button {
+        font-size: 1.5rem;
+        margin: 0.5rem;
+        width: 150px;
+    }
+    h5 {
+        font-size: 1.5rem;
+    }
+   .phoneNav {
+       background-color: #D6F1C1;
+       height: 15vw;
+   }
+   .goBackUpButton {
+    top:80vh;
+    right: 43vw;
+    }
+    input {
+        width: 90%;
+    }
+
+    button:hover {
+        background-color:#D6F1C1; 
+        color: #643754;
+        text-shadow: 0 0 0 0 transparent;
+    }
+
+}
+
+/* KEYFRAMES */
+@keyframes liniarOpacity {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}

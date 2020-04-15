@@ -1,0 +1,150 @@
+@font-face {
+    font-family: Milestone;
+    src: url(MilestoneFont.otf);
+ }
+ 
+body {
+    background-color: #643754;
+}
+ 
+#login, #register, #forgot {
+    height: 100vh;
+}
+ 
+#register {
+    animation: animRight 2s;
+}
+ 
+#login {
+    animation: animRight 3s;
+}
+ 
+html {
+    scroll-behavior: smooth;
+}
+ 
+#forgot {
+    animation: animRight 2s;
+}
+ 
+h1 {
+    font-family: Milestone;
+    color: #D6F1C1;
+    font-size: 8rem;
+    font-weight: 100;
+    margin-bottom: 2rem;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    margin-bottom: 0;
+}
+ 
+h3 {
+    font-family: Milestone;
+    color: #D6F1C1;
+    font-size: 5rem;
+    font-weight: 100;
+    margin-bottom: 2rem;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    margin-bottom: 0;
+}
+ 
+form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+ 
+input {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #D6F1C1;
+    border: 0;
+    margin: 0.5rem auto;
+    width: 30%;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #643754;
+    /* font-weight: 100; */
+    font-size: 1.2rem;
+    transition: background-color 0.5s;
+    height: 2rem;
+}
+ 
+input:focus {
+    outline: none;
+    background-color: rgb(228, 230, 227);
+}
+ 
+button {
+    background-color: #D6F1C1;
+    font-family: Milestone;
+    color: #643754;
+    border: 0;
+    font-size: 2rem;
+    margin: 1rem;
+    padding: 0.2rem 2rem;
+    transition: background-color 0.5s, text-shadow 0.2s;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+ 
+button:hover {
+    background-color:#904e79;
+    color: #D6F1C1;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+ 
+form p {
+    font-family: Milestone;
+    color: #D6F1C1;
+    font-weight: 100;
+    font-size: 2rem;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 0;
+   
+}
+ 
+a {
+    text-decoration: none;
+    font-family: Milestone;
+    color: #D6F1C1;
+    font-size: 1.5rem;
+}
+ 
+/* SMALL SCREEN CONDITIONS */
+@media screen and (max-width: 800px){
+    h1 {
+        font-size: 5rem;
+    }
+ 
+    input {
+        margin: 0.5rem auto;
+        width: 50%;
+        font-size: 1.2rem;
+    }
+   
+    input {
+        width: 70%;
+        height: 2rem;
+    }
+   
+    button {
+        font-size: 2rem;
+        margin: 1rem;
+        padding: 0.2rem 2rem;
+    }
+   
+    form p {
+        font-size: 2rem;
+    }
+ 
+    h3 {
+        font-size: 4em;
+        margin-bottom: 1rem;
+    }
+}
+ 
+@keyframes animRight {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}

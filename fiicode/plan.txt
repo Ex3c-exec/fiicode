@@ -1,0 +1,51 @@
+Proiect biblioteca online
+
+I) FUNCTIONALITATI ALE APLICATIEI
+    O aplicatie cu ajutorul careia poti sa imprumuti carti astfel:
+        1) te loghezi sau eventul iti creezi un cont
+        2) eventuri ale utilizatorului (grad 1)
+            2.1) vizualizare lista cu toate cartile
+            2.2) *adaugare carti la lista 'de dorinte' + stergere din aceea lista
+            2.3) request carte 
+            2.4) like / dislike la o carte 
+            2.5) update la profilul personal + schimarea parolei
+        
+        3) eventuri ale adminului (grad 2)
+            3.1) adauga / sterge / modifica carti
+            3.2)* stergere utilizatori (grad 1)
+            3.3) vizualizare / confirmare / refuz request-uri
+            3.4) seteaza daca o carte este disponibila / nedisponibila
+            3.5) are si toate eventurile utilizatorului (grad 1)  
+
+II) COMPONENTE 
+... 
+
+III) GESTIONAREA PROIECTULUI PE ARII
+    1) BACKEND furnizeaza:
+        1.1) LOGIN / REGISTER 
+            1.1.1) daca login / register a avut loc cu succes, eventual eroare
+            1.1.2) daca se termina cu succes, returnezi un token
+            1.1.3) in caz ca a fost uitata parola, o primesti prin email inapoi 
+        1.2)  GESTIONARE CARTI (grad 1 + grad 2)
+            1.2.1) GET - { fisier? } imi returnezi (toate/un numar de carti) cartile sau imi returnezi una
+            1.2.2) POST - {fisier? } utilizatorul cere o carte spre imprumutare
+            1.2.3) DELETE - {fisier? } utilizatorul sterge cererea facuta
+            1.2.4) UPDATE - {fisier? } update la profilul personal
+            1.2.5) UPDATE - {fisier? } schimbare parola
+            1.2.6) POST - {fisier? } like/dislike la o carte
+        1.3)  GESTIONARE CARTI (grad 2)
+            1.3.2) adauga / sterge / modifica carti globale
+                1.3.2.1) POST - {fisier? } adminul poate adauga o carte in lista globala
+                1.3.2.1) DELETE - {fisier? } adminul poate sterge o carte din lista globala
+                1.3.2.1) UPDATE - {fisier? } adminul poate updata o carte din lista globala
+            1.3.3) vizualizare / confirmare / refuz request-uri
+                1.3.3.1) GET - {fisier? } adminul poate vizualiza cererile
+                1.3.3.2) POST - {fisier? } adminual poate confirma / refuza un request (daca cofirma, cartea devine indisponibila)
+                1.3.3.3) POST - {fisier? } adminul seteaza daca o carte este disponibila / indisponibila
+    
+    2) FRONTEND
+        2.1) 
+        
+
+
+
