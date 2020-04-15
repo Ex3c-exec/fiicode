@@ -11,11 +11,16 @@ Aplicația este organizată în 2 secțiuni:
 # Funcționalități
 * logare/înregistrare (rol admin/user)<br/>
 *utilizatorul își poate reseta parola pierdută*
+* contactarea administratorului prin email
+* emailurile pot fi vizualizate pe contul de mai jos:
+```
+dd
+```
 * vizualizare cărți (titlu, autor, descriere, imagine, disponibilitate, aprecieri)
 * cerere împrumut carte<br/>
 *adminul poate acepta / respinge cererea*
 * gestionare cărți (creare, editare, ștergere)
 
 # Instalare
-
-
+* Baza de date se află în folderul fiicode, sub numele de „fiicode.sql”
+* Folderul „fiicode” trebuie mutat în directorul „htdocs” 
