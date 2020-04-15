@@ -10,6 +10,6 @@ Aplicația este organizată în 2 secțiuni:
 * logare/înregistrare (rol admin/user)
 * vizualizare cărți (titlu, autor, descriere, imagine, disponibilitate, aprecieri)
 * cerere împrumut carte
-*adminul poate acepta / respinge cererea*
+**adminul poate acepta / respinge cererea*
 * gestionare cărți (creare, editare, ștergere)
 
