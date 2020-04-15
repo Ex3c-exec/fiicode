@@ -27,5 +27,5 @@ parolă: fiicodeemail
 * Folderul „fiicode” trebuie mutat în directorul „htdocs” 
 
 # Contact
-Nicolae Martinescu, martinescunicolaee3@gmail.com
+Nicolae Martinescu, martinescunicolaee3@gmail.com<br/>
 Vladimir Anfimov, vladimir@safehouse.ro
