@@ -14,7 +14,7 @@ Aplicația este organizată în 2 secțiuni:
 * contactarea administratorului prin email
 * emailurile pot fi vizualizate pe contul de mai jos:
 ```
-dd
+Email: fiicodebooksemail@gmail.com Parolă: fiicodeemail
 ```
 * vizualizare cărți (titlu, autor, descriere, imagine, disponibilitate, aprecieri)
 * cerere împrumut carte<br/>
