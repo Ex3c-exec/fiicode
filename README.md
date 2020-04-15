@@ -25,3 +25,7 @@ parolă: fiicodeemail
 # Instalare
 * Baza de date se află în folderul fiicode, sub numele de „fiicode.sql”
 * Folderul „fiicode” trebuie mutat în directorul „htdocs” 
+
+# Contact
+Nicolae Martinescu, martinescunicolaee3@gmail.com
+Vladimir Anfimov, vladimir@safehouse.ro
