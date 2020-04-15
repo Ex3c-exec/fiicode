@@ -11,7 +11,7 @@ Aplicația este organizată în 2 secțiuni:
 # Funcționalități
 * logare/înregistrare (rol admin/user)<br/>
 *utilizatorul își poate reseta parola pierdută*
-* contactarea administratorului prin email
+* contactarea administratorului prin email<br/>
 *emailurile pot fi vizualizate pe contul de mai jos:*
 ```
 email: fiicodebooksemail@gmail.com
