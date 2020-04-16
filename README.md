@@ -9,6 +9,11 @@ Proiectul „ReadWithEase” prezintă o metodă ușoară de a împrumuta cărț
 
 # Funcționalități
 * logare/înregistrare (rol admin/user)<br/>
+*contul de administrator:*
+```
+email: fiicodebooksemail@gmail.com
+parolă: admin
+```
 *utilizatorul își poate reseta parola pierdută*
 * contactarea administratorului prin email<br/>
 *emailurile pot fi vizualizate pe contul de mai jos:*
