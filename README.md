@@ -1,6 +1,8 @@
 # Despre proiect
 Proiectul „ReadWithEase” prezintă o metodă ușoară de a împrumuta cărți de la o librărie locală. Managerul bibliotecii poate gestiona cărțile, astfel încât clienții pot vedea ce este disponibil și pot rezerva cartea dorită. 
 
+*Prezentare video: https://www.youtube.com/watch?v=y8O5hCCg-3E&feature=youtu.be*
+
 # Tehologii
 * Frontend (Javascript Plain, sweetalert2, Bootstrap 4) 
 * Backend (Php)
